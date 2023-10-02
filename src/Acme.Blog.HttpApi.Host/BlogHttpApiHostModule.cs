@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Acme.EntityFrameworkCore;
+using Acme.MultiTenancy;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -12,10 +14,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Acme.Blog.EntityFrameworkCore;
-using Acme.Blog.MultiTenancy;
-using StackExchange.Redis;
 using Microsoft.OpenApi.Models;
+using StackExchange.Redis;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
@@ -24,12 +24,11 @@ using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
 using Volo.Abp.Caching.StackExchangeRedis;
 using Volo.Abp.DistributedLocking;
-using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Acme.Blog;
+namespace Acme;
 
 [DependsOn(
     typeof(BlogHttpApiModule),
@@ -69,7 +68,6 @@ public class BlogHttpApiHostModule : AbpModule
         var hostingEnvironment = context.Services.GetHostingEnvironment();
 
         if (hostingEnvironment.IsDevelopment())
-        {
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
                 options.FileSets.ReplaceEmbeddedByPhysical<BlogDomainSharedModule>(
@@ -85,7 +83,6 @@ public class BlogHttpApiHostModule : AbpModule
                     Path.Combine(hostingEnvironment.ContentRootPath,
                         $"..{Path.DirectorySeparatorChar}Acme.Blog.Application"));
             });
-        }
     }
 
     private void ConfigureConventionalControllers()
@@ -113,7 +110,7 @@ public class BlogHttpApiHostModule : AbpModule
             configuration["AuthServer:Authority"],
             new Dictionary<string, string>
             {
-                    {"Blog", "Blog API"}
+                { "Blog", "Blog API" }
             },
             options =>
             {
@@ -131,7 +128,7 @@ public class BlogHttpApiHostModule : AbpModule
         var dataProtectionBuilder = context.Services.AddDataProtection().SetApplicationName("Blog");
         if (!hostingEnvironment.IsDevelopment())
         {
-            var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
+            var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]!);
             dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "Blog-Protection-Keys");
         }
     }
@@ -143,7 +140,7 @@ public class BlogHttpApiHostModule : AbpModule
         context.Services.AddSingleton<IDistributedLockProvider>(sp =>
         {
             var connection = ConnectionMultiplexer
-                .Connect(configuration["Redis:Configuration"]);
+                .Connect(configuration["Redis:Configuration"]!);
             return new RedisDistributedSynchronizationProvider(connection.GetDatabase());
         });
     }
@@ -173,10 +170,7 @@ public class BlogHttpApiHostModule : AbpModule
         var app = context.GetApplicationBuilder();
         var env = context.GetEnvironment();
 
-        if (env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-        }
+        if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
         app.UseAbpRequestLocalization();
         app.UseCorrelationId();
@@ -185,10 +179,7 @@ public class BlogHttpApiHostModule : AbpModule
         app.UseCors();
         app.UseAuthentication();
 
-        if (MultiTenancyConsts.IsEnabled)
-        {
-            app.UseMultiTenancy();
-        }
+        if (MultiTenancyConsts.IsEnabled) app.UseMultiTenancy();
 
         app.UseAuthorization();
 

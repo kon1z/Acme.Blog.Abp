@@ -1,9 +1,8 @@
 ﻿using Volo.Abp.Localization;
 
-namespace Acme.Blog.Localization;
+namespace Acme.Localization;
 
 [LocalizationResourceName("Blog")]
 public class BlogResource
 {
-
 }

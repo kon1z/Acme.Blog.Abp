@@ -5,7 +5,7 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <RootNamespace>Acme.Blog</RootNamespace>
+    <RootNamespace>Acme</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

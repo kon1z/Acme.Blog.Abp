@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Acme.Blog.Models.Test;
+namespace Acme.Models.Test;
 
 public class TestModel
 {

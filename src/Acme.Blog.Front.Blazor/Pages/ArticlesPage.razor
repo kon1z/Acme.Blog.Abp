@@ -1,0 +1,25 @@
+﻿@page "/Articles"
+@using Acme.Blog.IAppServices;
+@using Acme.Blog.AppServices
+@inject IBlogAppService BlogAppService
+
+<h3>Article</h3>
+
+@foreach (var article in Articles)
+{
+    <h4>@article.Title</h4>
+    <p>@article.Description</p>
+    <hr/>
+}
+
+@code {
+    private List<ArticleDto> Articles { get; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var res = await BlogAppService.GetListAsync(new GetArticleDto());
+
+        Articles.AddRange(res.Items);
+    }
+
+}

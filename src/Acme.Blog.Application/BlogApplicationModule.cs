@@ -7,7 +7,7 @@ using Volo.Abp.PermissionManagement;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 
-namespace Acme.Blog;
+namespace Acme;
 
 [DependsOn(
     typeof(BlogDomainModule),
@@ -18,14 +18,11 @@ namespace Acme.Blog;
     typeof(AbpTenantManagementApplicationModule),
     typeof(AbpFeatureManagementApplicationModule),
     typeof(AbpSettingManagementApplicationModule)
-    )]
+)]
 public class BlogApplicationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        Configure<AbpAutoMapperOptions>(options =>
-        {
-            options.AddMaps<BlogApplicationModule>();
-        });
+        Configure<AbpAutoMapperOptions>(options => { options.AddMaps<BlogApplicationModule>(); });
     }
 }

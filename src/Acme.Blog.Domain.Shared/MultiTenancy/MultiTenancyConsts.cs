@@ -1,4 +1,4 @@
-﻿namespace Acme.Blog.MultiTenancy;
+﻿namespace Acme.MultiTenancy;
 
 public static class MultiTenancyConsts
 {

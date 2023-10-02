@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 
-namespace Acme.Blog.Controllers;
+namespace Acme.Controllers;
 
 public class HomeController : AbpController
 {

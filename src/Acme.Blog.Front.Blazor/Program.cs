@@ -1,10 +1,10 @@
+using System;
 using Acme.Blog.Front.Blazor;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
-using System;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
@@ -34,10 +34,7 @@ try
 }
 catch (Exception ex)
 {
-    if (ex is HostAbortedException)
-    {
-        throw;
-    }
+    if (ex is HostAbortedException) throw;
 
     Log.Fatal(ex, "Host terminated unexpectedly!");
     return 1;

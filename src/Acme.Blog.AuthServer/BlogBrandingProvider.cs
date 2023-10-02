@@ -1,7 +1,7 @@
-﻿using Volo.Abp.Ui.Branding;
-using Volo.Abp.DependencyInjection;
+﻿using Volo.Abp.DependencyInjection;
+using Volo.Abp.Ui.Branding;
 
-namespace Acme.Blog;
+namespace Acme;
 
 [Dependency(ReplaceServices = true)]
 public class BlogBrandingProvider : DefaultBrandingProvider

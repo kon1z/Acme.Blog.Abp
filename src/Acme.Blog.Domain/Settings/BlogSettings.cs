@@ -1,4 +1,4 @@
-﻿namespace Acme.Blog.Settings;
+﻿namespace Acme.Settings;
 
 public static class BlogSettings
 {

@@ -39,9 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acme.Blog.DbMigrator", "src
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{518AA832-A506-4833-9766-D7B5813E403B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.Blog.Admin.Blazor", "src\Acme.Blog.Admin.Blazor\Acme.Blog.Admin.Blazor.csproj", "{58DE4BC6-5216-4C76-8627-A126516AF952}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acme.Blog.Admin.Blazor", "src\Acme.Blog.Admin.Blazor\Acme.Blog.Admin.Blazor.csproj", "{58DE4BC6-5216-4C76-8627-A126516AF952}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.Blog.Front.Blazor", "src\Acme.Blog.Front.Blazor\Acme.Blog.Front.Blazor.csproj", "{D82AB9D4-0442-4F1C-BBA3-24597A376E50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acme.Blog.Front.Blazor", "src\Acme.Blog.Front.Blazor\Acme.Blog.Front.Blazor.csproj", "{D82AB9D4-0442-4F1C-BBA3-24597A376E50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

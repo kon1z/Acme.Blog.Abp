@@ -11,13 +11,13 @@ using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.Uow;
 
-namespace Acme.Blog.EntityFrameworkCore;
+namespace Acme.EntityFrameworkCore;
 
 [DependsOn(
     typeof(BlogEntityFrameworkCoreModule),
     typeof(BlogTestBaseModule),
     typeof(AbpEntityFrameworkCoreSqliteModule)
-    )]
+)]
 public class BlogEntityFrameworkCoreTestModule : AbpModule
 {
     private SqliteConnection? _sqliteConnection;
@@ -45,10 +45,7 @@ public class BlogEntityFrameworkCoreTestModule : AbpModule
 
         services.Configure<AbpDbContextOptions>(options =>
         {
-            options.Configure(context =>
-            {
-                context.DbContextOptions.UseSqlite(_sqliteConnection);
-            });
+            options.Configure(context => { context.DbContextOptions.UseSqlite(_sqliteConnection); });
         });
     }
 

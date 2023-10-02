@@ -1,6 +1,9 @@
 using System;
 using System.IO;
 using System.Linq;
+using Acme.EntityFrameworkCore;
+using Acme.Localization;
+using Acme.MultiTenancy;
 using Localization.Resources.AbpUi;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
@@ -9,15 +12,10 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Acme.Blog.EntityFrameworkCore;
-using Acme.Blog.Localization;
-using Acme.Blog.MultiTenancy;
 using StackExchange.Redis;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
-using Volo.Abp.AspNetCore.Mvc.UI;
-using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
@@ -32,10 +30,9 @@ using Volo.Abp.DistributedLocking;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation.Urls;
-using Volo.Abp.UI;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Acme.Blog;
+namespace Acme;
 
 [DependsOn(
     typeof(AbpAutofacModule),
@@ -47,7 +44,7 @@ namespace Acme.Blog;
     typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
     typeof(BlogEntityFrameworkCoreModule),
     typeof(AbpAspNetCoreSerilogModule)
-    )]
+)]
 public class BlogAuthServerModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
@@ -81,58 +78,52 @@ public class BlogAuthServerModule : AbpModule
         {
             options.StyleBundles.Configure(
                 LeptonXLiteThemeBundles.Styles.Global,
-                bundle =>
-                {
-                    bundle.AddFiles("/global-styles.css");
-                }
+                bundle => { bundle.AddFiles("/global-styles.css"); }
             );
         });
 
         Configure<AbpAuditingOptions>(options =>
         {
-                //options.IsEnabledForGetRequests = true;
-                options.ApplicationName = "AuthServer";
+            //options.IsEnabledForGetRequests = true;
+            options.ApplicationName = "AuthServer";
         });
 
         if (hostingEnvironment.IsDevelopment())
-        {
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
-                options.FileSets.ReplaceEmbeddedByPhysical<BlogDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.Blog.Domain.Shared"));
-                options.FileSets.ReplaceEmbeddedByPhysical<BlogDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.Blog.Domain"));
+                options.FileSets.ReplaceEmbeddedByPhysical<BlogDomainSharedModule>(
+                    Path.Combine(hostingEnvironment.ContentRootPath,
+                        $"..{Path.DirectorySeparatorChar}Acme.Blog.Domain.Shared"));
+                options.FileSets.ReplaceEmbeddedByPhysical<BlogDomainModule>(
+                    Path.Combine(hostingEnvironment.ContentRootPath,
+                        $"..{Path.DirectorySeparatorChar}Acme.Blog.Domain"));
             });
-        }
 
         Configure<AppUrlOptions>(options =>
         {
             options.Applications["MVC"].RootUrl = configuration["App:SelfUrl"];
-            options.RedirectAllowedUrls.AddRange(configuration["App:RedirectAllowedUrls"]?.Split(',') ?? Array.Empty<string>());
+            options.RedirectAllowedUrls.AddRange(configuration["App:RedirectAllowedUrls"]?.Split(',') ??
+                                                 Array.Empty<string>());
 
             options.Applications["Angular"].RootUrl = configuration["App:ClientUrl"];
             options.Applications["Angular"].Urls[AccountUrlNames.PasswordReset] = "account/reset-password";
         });
 
-        Configure<AbpBackgroundJobOptions>(options =>
-        {
-            options.IsJobExecutionEnabled = false;
-        });
+        Configure<AbpBackgroundJobOptions>(options => { options.IsJobExecutionEnabled = false; });
 
-        Configure<AbpDistributedCacheOptions>(options =>
-        {
-            options.KeyPrefix = "Blog:";
-        });
+        Configure<AbpDistributedCacheOptions>(options => { options.KeyPrefix = "Blog:"; });
 
         var dataProtectionBuilder = context.Services.AddDataProtection().SetApplicationName("Blog");
         if (!hostingEnvironment.IsDevelopment())
         {
-            var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
+            var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]!);
             dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "Blog-Protection-Keys");
         }
 
         context.Services.AddSingleton<IDistributedLockProvider>(sp =>
         {
             var connection = ConnectionMultiplexer
-                .Connect(configuration["Redis:Configuration"]);
+                .Connect(configuration["Redis:Configuration"]!);
             return new RedisDistributedSynchronizationProvider(connection.GetDatabase());
         });
 
@@ -161,17 +152,11 @@ public class BlogAuthServerModule : AbpModule
         var app = context.GetApplicationBuilder();
         var env = context.GetEnvironment();
 
-        if (env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-        }
+        if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
         app.UseAbpRequestLocalization();
 
-        if (!env.IsDevelopment())
-        {
-            app.UseErrorPage();
-        }
+        if (!env.IsDevelopment()) app.UseErrorPage();
 
         app.UseCorrelationId();
         app.UseStaticFiles();
@@ -180,10 +165,7 @@ public class BlogAuthServerModule : AbpModule
         app.UseAuthentication();
         app.UseAbpOpenIddictValidation();
 
-        if (MultiTenancyConsts.IsEnabled)
-        {
-            app.UseMultiTenancy();
-        }
+        if (MultiTenancyConsts.IsEnabled) app.UseMultiTenancy();
 
         app.UseUnitOfWork();
         app.UseAuthorization();

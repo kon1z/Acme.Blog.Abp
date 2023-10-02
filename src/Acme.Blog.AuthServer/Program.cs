@@ -6,11 +6,11 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 
-namespace Acme.Blog;
+namespace Acme;
 
 public class Program
 {
-    public async static Task<int> Main(string[] args)
+    public static async Task<int> Main(string[] args)
     {
         Log.Logger = new LoggerConfiguration()
 #if DEBUG
@@ -40,10 +40,7 @@ public class Program
         }
         catch (Exception ex)
         {
-            if (ex is HostAbortedException)
-            {
-                throw;
-            }
+            if (ex is HostAbortedException) throw;
 
             Log.Fatal(ex, "Acme.Blog.AuthServer terminated unexpectedly!");
             return 1;

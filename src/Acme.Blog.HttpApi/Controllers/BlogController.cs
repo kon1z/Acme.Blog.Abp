@@ -1,7 +1,7 @@
-﻿using Acme.Blog.Localization;
+﻿using Acme.Localization;
 using Volo.Abp.AspNetCore.Mvc;
 
-namespace Acme.Blog.Controllers;
+namespace Acme.Controllers;
 
 /* Inherit your controllers from this class.
  */

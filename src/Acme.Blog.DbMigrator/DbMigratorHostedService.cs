@@ -1,9 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Acme.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Acme.Blog.Data;
 using Serilog;
 using Volo.Abp;
 using Volo.Abp.Data;
@@ -12,8 +12,8 @@ namespace Acme.Blog.DbMigrator;
 
 public class DbMigratorHostedService : IHostedService
 {
-    private readonly IHostApplicationLifetime _hostApplicationLifetime;
     private readonly IConfiguration _configuration;
+    private readonly IHostApplicationLifetime _hostApplicationLifetime;
 
     public DbMigratorHostedService(IHostApplicationLifetime hostApplicationLifetime, IConfiguration configuration)
     {
@@ -24,12 +24,12 @@ public class DbMigratorHostedService : IHostedService
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         using (var application = await AbpApplicationFactory.CreateAsync<BlogDbMigratorModule>(options =>
-        {
-           options.Services.ReplaceConfiguration(_configuration);
-           options.UseAutofac();
-           options.Services.AddLogging(c => c.AddSerilog());
-           options.AddDataMigrationEnvironment();
-        }))
+               {
+                   options.Services.ReplaceConfiguration(_configuration);
+                   options.UseAutofac();
+                   options.Services.AddLogging(c => c.AddSerilog());
+                   options.AddDataMigrationEnvironment();
+               }))
         {
             await application.InitializeAsync();
 

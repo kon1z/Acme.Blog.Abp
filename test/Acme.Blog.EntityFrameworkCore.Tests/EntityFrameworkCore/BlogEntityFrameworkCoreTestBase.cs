@@ -1,8 +1,5 @@
-﻿using Volo.Abp;
-
-namespace Acme.Blog.EntityFrameworkCore;
+﻿namespace Acme.EntityFrameworkCore;
 
 public abstract class BlogEntityFrameworkCoreTestBase : BlogTestBase<BlogEntityFrameworkCoreTestModule>
 {
-
 }

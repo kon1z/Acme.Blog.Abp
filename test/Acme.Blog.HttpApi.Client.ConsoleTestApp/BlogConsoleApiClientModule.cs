@@ -12,7 +12,7 @@ namespace Acme.Blog.HttpApi.Client.ConsoleTestApp;
     typeof(AbpAutofacModule),
     typeof(BlogHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
-    )]
+)]
 public class BlogConsoleApiClientModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)

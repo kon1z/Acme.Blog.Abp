@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Acme.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Acme.Blog.Data;
 using Volo.Abp.DependencyInjection;
 
-namespace Acme.Blog.EntityFrameworkCore;
+namespace Acme.EntityFrameworkCore;
 
 public class EntityFrameworkCoreBlogDbSchemaMigrator
     : IBlogDbSchemaMigrator, ITransientDependency

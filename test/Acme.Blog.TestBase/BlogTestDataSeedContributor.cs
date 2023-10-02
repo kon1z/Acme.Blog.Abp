@@ -2,7 +2,7 @@
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 
-namespace Acme.Blog;
+namespace Acme;
 
 public class BlogTestDataSeedContributor : IDataSeedContributor, ITransientDependency
 {

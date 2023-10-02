@@ -1,9 +1,9 @@
-﻿using Shouldly;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Shouldly;
 using Volo.Abp.Identity;
 using Xunit;
 
-namespace Acme.Blog.Samples;
+namespace Acme.Samples;
 
 /* This is just an example test class.
  * Normally, you don't test code of the modules you are using

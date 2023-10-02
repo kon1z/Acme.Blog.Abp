@@ -13,16 +13,15 @@ using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.TenantManagement;
 
-namespace Acme.Blog.Data;
+namespace Acme.Data;
 
 public class BlogDbMigrationService : ITransientDependency
 {
-    public ILogger<BlogDbMigrationService> Logger { get; set; }
+    private readonly ICurrentTenant _currentTenant;
 
     private readonly IDataSeeder _dataSeeder;
     private readonly IEnumerable<IBlogDbSchemaMigrator> _dbSchemaMigrators;
     private readonly ITenantRepository _tenantRepository;
-    private readonly ICurrentTenant _currentTenant;
 
     public BlogDbMigrationService(
         IDataSeeder dataSeeder,
@@ -38,21 +37,20 @@ public class BlogDbMigrationService : ITransientDependency
         Logger = NullLogger<BlogDbMigrationService>.Instance;
     }
 
+    public ILogger<BlogDbMigrationService> Logger { get; set; }
+
     public async Task MigrateAsync()
     {
         var initialMigrationAdded = AddInitialMigrationIfNotExist();
 
-        if (initialMigrationAdded)
-        {
-            return;
-        }
+        if (initialMigrationAdded) return;
 
         Logger.LogInformation("Started database migrations...");
 
         await MigrateDatabaseSchemaAsync();
         await SeedDataAsync();
 
-        Logger.LogInformation($"Successfully completed host database migrations.");
+        Logger.LogInformation("Successfully completed host database migrations.");
 
         var tenants = await _tenantRepository.GetListAsync(includeDetails: true);
 
@@ -90,10 +88,7 @@ public class BlogDbMigrationService : ITransientDependency
         Logger.LogInformation(
             $"Migrating schema for {(tenant == null ? "host" : tenant.Name + " tenant")} database...");
 
-        foreach (var migrator in _dbSchemaMigrators)
-        {
-            await migrator.MigrateAsync();
-        }
+        foreach (var migrator in _dbSchemaMigrators) await migrator.MigrateAsync();
     }
 
     private async Task SeedDataAsync(Tenant? tenant = null)
@@ -101,8 +96,10 @@ public class BlogDbMigrationService : ITransientDependency
         Logger.LogInformation($"Executing {(tenant == null ? "host" : tenant.Name + " tenant")} database seed...");
 
         await _dataSeeder.SeedAsync(new DataSeedContext(tenant?.Id)
-            .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName, IdentityDataSeedContributor.AdminEmailDefaultValue)
-            .WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName, IdentityDataSeedContributor.AdminPasswordDefaultValue)
+            .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName,
+                IdentityDataSeedContributor.AdminEmailDefaultValue)
+            .WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName,
+                IdentityDataSeedContributor.AdminPasswordDefaultValue)
         );
     }
 
@@ -110,10 +107,7 @@ public class BlogDbMigrationService : ITransientDependency
     {
         try
         {
-            if (!DbMigrationsProjectExists())
-            {
-                return false;
-            }
+            if (!DbMigrationsProjectExists()) return false;
         }
         catch (Exception)
         {
@@ -127,10 +121,8 @@ public class BlogDbMigrationService : ITransientDependency
                 AddInitialMigration();
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
         catch (Exception e)
         {
@@ -149,7 +141,8 @@ public class BlogDbMigrationService : ITransientDependency
     private bool MigrationsFolderExists()
     {
         var dbMigrationsProjectFolder = GetEntityFrameworkCoreProjectFolderPath();
-        return dbMigrationsProjectFolder != null && Directory.Exists(Path.Combine(dbMigrationsProjectFolder, "Migrations"));
+        return dbMigrationsProjectFolder != null &&
+               Directory.Exists(Path.Combine(dbMigrationsProjectFolder, "Migrations"));
     }
 
     private void AddInitialMigration()
@@ -188,10 +181,7 @@ public class BlogDbMigrationService : ITransientDependency
     {
         var slnDirectoryPath = GetSolutionDirectoryPath();
 
-        if (slnDirectoryPath == null)
-        {
-            throw new Exception("Solution folder not found!");
-        }
+        if (slnDirectoryPath == null) throw new Exception("Solution folder not found!");
 
         var srcDirectoryPath = Path.Combine(slnDirectoryPath, "src");
 
@@ -207,10 +197,9 @@ public class BlogDbMigrationService : ITransientDependency
         {
             currentDirectory = Directory.GetParent(currentDirectory.FullName);
 
-            if (currentDirectory != null && Directory.GetFiles(currentDirectory.FullName).FirstOrDefault(f => f.EndsWith(".sln")) != null)
-            {
+            if (currentDirectory != null &&
+                Directory.GetFiles(currentDirectory.FullName).FirstOrDefault(f => f.EndsWith(".sln")) != null)
                 return currentDirectory.FullName;
-            }
         }
 
         return null;

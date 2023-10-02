@@ -1,4 +1,4 @@
-﻿using Acme.Blog.Localization;
+﻿using Acme.Localization;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.FeatureManagement;
@@ -13,7 +13,7 @@ using Volo.Abp.TenantManagement;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Acme.Blog;
+namespace Acme;
 
 [DependsOn(
     typeof(AbpAuditLoggingDomainSharedModule),
@@ -23,8 +23,8 @@ namespace Acme.Blog;
     typeof(AbpOpenIddictDomainSharedModule),
     typeof(AbpPermissionManagementDomainSharedModule),
     typeof(AbpSettingManagementDomainSharedModule),
-    typeof(AbpTenantManagementDomainSharedModule)    
-    )]
+    typeof(AbpTenantManagementDomainSharedModule)
+)]
 public class BlogDomainSharedModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
@@ -35,10 +35,7 @@ public class BlogDomainSharedModule : AbpModule
 
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        Configure<AbpVirtualFileSystemOptions>(options =>
-        {
-            options.FileSets.AddEmbedded<BlogDomainSharedModule>();
-        });
+        Configure<AbpVirtualFileSystemOptions>(options => { options.FileSets.AddEmbedded<BlogDomainSharedModule>(); });
 
         Configure<AbpLocalizationOptions>(options =>
         {

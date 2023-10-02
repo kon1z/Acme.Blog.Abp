@@ -1,5 +1,5 @@
-﻿using Localization.Resources.AbpUi;
-using Acme.Blog.Localization;
+﻿using Acme.Localization;
+using Localization.Resources.AbpUi;
 using Volo.Abp.Account;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
@@ -9,7 +9,7 @@ using Volo.Abp.PermissionManagement.HttpApi;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 
-namespace Acme.Blog;
+namespace Acme;
 
 [DependsOn(
     typeof(BlogApplicationContractsModule),
@@ -19,7 +19,7 @@ namespace Acme.Blog;
     typeof(AbpTenantManagementHttpApiModule),
     typeof(AbpFeatureManagementHttpApiModule),
     typeof(AbpSettingManagementHttpApiModule)
-    )]
+)]
 public class BlogHttpApiModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

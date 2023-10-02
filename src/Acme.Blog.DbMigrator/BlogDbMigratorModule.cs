@@ -1,4 +1,4 @@
-﻿using Acme.Blog.EntityFrameworkCore;
+﻿using Acme.EntityFrameworkCore;
 using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
 using Volo.Abp.Caching.StackExchangeRedis;
@@ -11,7 +11,7 @@ namespace Acme.Blog.DbMigrator;
     typeof(AbpCachingStackExchangeRedisModule),
     typeof(BlogEntityFrameworkCoreModule),
     typeof(BlogApplicationContractsModule)
-    )]
+)]
 public class BlogDbMigratorModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

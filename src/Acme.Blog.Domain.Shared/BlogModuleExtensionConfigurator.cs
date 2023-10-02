@@ -1,13 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Volo.Abp.Identity;
-using Volo.Abp.ObjectExtending;
-using Volo.Abp.Threading;
+﻿using Volo.Abp.Threading;
 
-namespace Acme.Blog;
+namespace Acme;
 
 public static class BlogModuleExtensionConfigurator
 {
-    private static readonly OneTimeRunner OneTimeRunner = new OneTimeRunner();
+    private static readonly OneTimeRunner OneTimeRunner = new();
 
     public static void Configure()
     {
@@ -57,7 +54,7 @@ public static class BlogModuleExtensionConfigurator
                               //validation rules
                               property.Attributes.Add(new RequiredAttribute());
                               property.Attributes.Add(new StringLengthAttribute(64) {MinimumLength = 4});
-                              
+
                               property.Configuration[IdentityModuleExtensionConsts.ConfigurationNames.AllowUserToEdit] = true;
 
                               //...other configurations for this property

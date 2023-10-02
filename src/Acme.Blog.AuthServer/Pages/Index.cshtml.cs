@@ -5,10 +5,16 @@ using Volo.Abp.AspNetCore.Mvc.UI.RazorPages;
 using Volo.Abp.Localization;
 using Volo.Abp.OpenIddict.Applications;
 
-namespace Acme.Blog.Pages;
+namespace Acme.Pages;
 
 public class IndexModel : AbpPageModel
 {
+    public IndexModel(IOpenIddictApplicationRepository openIdApplicationRepository, ILanguageProvider languageProvider)
+    {
+        OpenIdApplicationRepository = openIdApplicationRepository;
+        LanguageProvider = languageProvider;
+    }
+
     public List<OpenIddictApplication>? Applications { get; protected set; }
 
     public IReadOnlyList<LanguageInfo>? Languages { get; protected set; }
@@ -18,12 +24,6 @@ public class IndexModel : AbpPageModel
     protected IOpenIddictApplicationRepository OpenIdApplicationRepository { get; }
 
     protected ILanguageProvider LanguageProvider { get; }
-
-    public IndexModel(IOpenIddictApplicationRepository openIdApplicationRepository, ILanguageProvider languageProvider)
-    {
-        OpenIdApplicationRepository = openIdApplicationRepository;
-        LanguageProvider = languageProvider;
-    }
 
     public async Task OnGetAsync()
     {

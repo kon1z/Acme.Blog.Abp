@@ -1,6 +1,5 @@
-﻿namespace Acme.Blog;
+﻿namespace Acme;
 
 public abstract class BlogDomainTestBase : BlogTestBase<BlogDomainTestModule>
 {
-
 }

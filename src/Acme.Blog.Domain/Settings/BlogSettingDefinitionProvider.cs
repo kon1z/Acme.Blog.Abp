@@ -1,6 +1,6 @@
 ﻿using Volo.Abp.Settings;
 
-namespace Acme.Blog.Settings;
+namespace Acme.Settings;
 
 public class BlogSettingDefinitionProvider : SettingDefinitionProvider
 {

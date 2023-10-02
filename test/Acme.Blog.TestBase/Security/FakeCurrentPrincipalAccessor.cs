@@ -3,7 +3,7 @@ using System.Security.Claims;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Security.Claims;
 
-namespace Acme.Blog.Security;
+namespace Acme.Security;
 
 [Dependency(ReplaceServices = true)]
 public class FakeCurrentPrincipalAccessor : ThreadCurrentPrincipalAccessor
@@ -17,9 +17,9 @@ public class FakeCurrentPrincipalAccessor : ThreadCurrentPrincipalAccessor
     {
         return new ClaimsPrincipal(new ClaimsIdentity(new List<Claim>
         {
-            new Claim(AbpClaimTypes.UserId, "2e701e62-0953-4dd3-910b-dc6cc93ccb0d"),
-            new Claim(AbpClaimTypes.UserName, "admin"),
-            new Claim(AbpClaimTypes.Email, "admin@abp.io")
+            new(AbpClaimTypes.UserId, "2e701e62-0953-4dd3-910b-dc6cc93ccb0d"),
+            new(AbpClaimTypes.UserName, "admin"),
+            new(AbpClaimTypes.Email, "admin@abp.io")
         }));
     }
 }

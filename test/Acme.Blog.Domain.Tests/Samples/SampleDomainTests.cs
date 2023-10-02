@@ -3,7 +3,7 @@ using Shouldly;
 using Volo.Abp.Identity;
 using Xunit;
 
-namespace Acme.Blog.Samples;
+namespace Acme.Samples;
 
 /* This is just an example test class.
  * Normally, you don't test code of the modules you are using
@@ -12,8 +12,8 @@ namespace Acme.Blog.Samples;
  */
 public class SampleDomainTests : BlogDomainTestBase
 {
-    private readonly IIdentityUserRepository _identityUserRepository;
     private readonly IdentityUserManager _identityUserManager;
+    private readonly IIdentityUserRepository _identityUserRepository;
 
     public SampleDomainTests()
     {
