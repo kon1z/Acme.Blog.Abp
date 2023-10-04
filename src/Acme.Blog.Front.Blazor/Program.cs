@@ -1,8 +1,4 @@
-using System;
 using Acme.Blog.Front.Blazor;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 
@@ -17,7 +13,7 @@ Log.Logger = new LoggerConfiguration()
 
 try
 {
-    Log.Information("Starting web host.");
+    Log.Information("Starting front host.");
     var builder = WebApplication.CreateBuilder(args);
     builder.Host.AddAppSettingsSecretsJson()
         .UseAutofac()

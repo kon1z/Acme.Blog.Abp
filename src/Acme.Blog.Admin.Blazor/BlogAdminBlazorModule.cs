@@ -1,7 +1,5 @@
 ﻿using Acme.Localization;
 using Acme.MultiTenancy;
-using Blazorise.Bootstrap5;
-using Blazorise.Icons.FontAwesome;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Serilog;
@@ -12,7 +10,7 @@ using Volo.Abp.MultiTenancy;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Acme.Blog.Front.Blazor;
+namespace Acme.Blog.Admin.Blazor;
 
 [DependsOn(
     typeof(BlogHttpApiClientModule),
@@ -20,7 +18,7 @@ namespace Acme.Blog.Front.Blazor;
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpAutoMapperModule)
 )]
-public class BlogFrontBlazorModule : AbpModule
+public class BlogAdminBlazorModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
@@ -30,7 +28,7 @@ public class BlogFrontBlazorModule : AbpModule
                 typeof(BlogResource),
                 typeof(BlogDomainSharedModule).Assembly,
                 typeof(BlogApplicationContractsModule).Assembly,
-                typeof(BlogFrontBlazorModule).Assembly
+                typeof(BlogAdminBlazorModule).Assembly
             );
         });
     }
@@ -45,14 +43,19 @@ public class BlogFrontBlazorModule : AbpModule
         ConfigureAutoMapper();
         ConfigureVirtualFileSystem(hostingEnvironment);
         ConfigureBlazor(context);
-        ConfigureBlazorise(context);
+        ConfigureAntBlazor(context);
+    }
+
+    private void ConfigureAntBlazor(ServiceConfigurationContext context)
+    {
+        context.Services.AddAntDesign();
     }
 
     private void ConfigureUrls(IConfiguration configuration)
     {
         Configure<AppUrlOptions>(options =>
         {
-            options.Applications["BlogFront"].RootUrl = configuration["App:SelfUrl"];
+            options.Applications["BlogAdmin"].RootUrl = configuration["App:SelfUrl"];
             options.Applications["BlogHost"].RootUrl = configuration["RemoteServices:Default:BaseUrl"];
         });
     }
@@ -73,7 +76,7 @@ public class BlogFrontBlazorModule : AbpModule
                 options.FileSets.ReplaceEmbeddedByPhysical<BlogApplicationContractsModule>(
                     Path.Combine(hostingEnvironment.ContentRootPath,
                         $"..{Path.DirectorySeparatorChar}Acme.Blog.Application.Contracts"));
-                options.FileSets.ReplaceEmbeddedByPhysical<BlogFrontBlazorModule>(hostingEnvironment.ContentRootPath);
+                options.FileSets.ReplaceEmbeddedByPhysical<BlogAdminBlazorModule>(hostingEnvironment.ContentRootPath);
             });
     }
 
@@ -83,16 +86,9 @@ public class BlogFrontBlazorModule : AbpModule
         context.Services.AddServerSideBlazor();
     }
 
-    private void ConfigureBlazorise(ServiceConfigurationContext context)
-    {
-        context.Services
-            .AddBootstrap5Providers()
-            .AddFontAwesomeIcons();
-    }
-
     private void ConfigureAutoMapper()
     {
-        Configure<AbpAutoMapperOptions>(options => { options.AddMaps<BlogFrontBlazorModule>(); });
+        Configure<AbpAutoMapperOptions>(options => { options.AddMaps<BlogAdminBlazorModule>(); });
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)
