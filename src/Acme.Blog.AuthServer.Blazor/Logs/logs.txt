@@ -1,0 +1,666 @@
+2023-10-06 20:56:49.948 +08:00 [INF] Starting Acme.Blog.AuthServer.Blazor
+2023-10-06 20:57:10.805 +08:00 [INF] Loaded ABP modules:
+2023-10-06 20:57:10.806 +08:00 [INF] - Acme.Blog.BlogAuthServerBlazorModule
+2023-10-06 20:57:10.806 +08:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2023-10-06 20:57:10.806 +08:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2023-10-06 20:57:10.806 +08:00 [INF]   - Acme.EntityFrameworkCore.BlogEntityFrameworkCoreModule
+2023-10-06 20:57:10.806 +08:00 [INF]     - Acme.BlogDomainModule
+2023-10-06 20:57:10.806 +08:00 [INF]       - Acme.BlogDomainSharedModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.Validation.AbpValidationModule
+2023-10-06 20:57:10.806 +08:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2023-10-06 20:57:10.806 +08:00 [INF]             - Volo.Abp.Localization.AbpLocalizationModule
+2023-10-06 20:57:10.806 +08:00 [INF]               - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2023-10-06 20:57:10.806 +08:00 [INF]               - Volo.Abp.Settings.AbpSettingsModule
+2023-10-06 20:57:10.806 +08:00 [INF]                 - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2023-10-06 20:57:10.806 +08:00 [INF]                 - Volo.Abp.Security.AbpSecurityModule
+2023-10-06 20:57:10.806 +08:00 [INF]                 - Volo.Abp.Data.AbpDataModule
+2023-10-06 20:57:10.806 +08:00 [INF]                   - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2023-10-06 20:57:10.806 +08:00 [INF]                   - Volo.Abp.Uow.AbpUnitOfWorkModule
+2023-10-06 20:57:10.806 +08:00 [INF]                   - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2023-10-06 20:57:10.806 +08:00 [INF]               - Volo.Abp.Threading.AbpThreadingModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainSharedModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainSharedModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.Json.SystemTextJson.AbpJsonSystemTextJsonModule
+2023-10-06 20:57:10.806 +08:00 [INF]             - Volo.Abp.Json.AbpJsonAbstractionsModule
+2023-10-06 20:57:10.806 +08:00 [INF]             - Volo.Abp.Timing.AbpTimingModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.Identity.AbpIdentityDomainSharedModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.Users.AbpUsersDomainSharedModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.Features.AbpFeaturesModule
+2023-10-06 20:57:10.806 +08:00 [INF]             - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2023-10-06 20:57:10.806 +08:00 [INF]               - Volo.Abp.MultiTenancy.AbpMultiTenancyAbstractionsModule
+2023-10-06 20:57:10.806 +08:00 [INF]             - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.OpenIddict.AbpOpenIddictDomainSharedModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainSharedModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.SettingManagement.AbpSettingManagementDomainSharedModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.TenantManagement.AbpTenantManagementDomainSharedModule
+2023-10-06 20:57:10.806 +08:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.Auditing.AbpAuditingModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.Json.AbpJsonModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.Auditing.AbpAuditingContractsModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.Domain.AbpDddDomainModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.EventBus.AbpEventBusModule
+2023-10-06 20:57:10.806 +08:00 [INF]             - Volo.Abp.Guids.AbpGuidsModule
+2023-10-06 20:57:10.806 +08:00 [INF]             - Volo.Abp.BackgroundWorkers.AbpBackgroundWorkersModule
+2023-10-06 20:57:10.806 +08:00 [INF]             - Volo.Abp.DistributedLocking.AbpDistributedLockingAbstractionsModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.Specifications.AbpSpecificationsModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.Caching.AbpCachingModule
+2023-10-06 20:57:10.806 +08:00 [INF]             - Volo.Abp.Serialization.AbpSerializationModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.Domain.AbpDddDomainSharedModule
+2023-10-06 20:57:10.806 +08:00 [INF]       - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.BackgroundJobs.AbpBackgroundJobsAbstractionsModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2023-10-06 20:57:10.806 +08:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainModule
+2023-10-06 20:57:10.806 +08:00 [INF]       - Volo.Abp.Identity.AbpIdentityDomainModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.Users.AbpUsersDomainModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.Users.AbpUsersAbstractionModule
+2023-10-06 20:57:10.806 +08:00 [INF]       - Volo.Abp.OpenIddict.AbpOpenIddictDomainModule
+2023-10-06 20:57:10.806 +08:00 [INF]       - Volo.Abp.PermissionManagement.OpenIddict.AbpPermissionManagementDomainOpenIddictModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.Authorization.AbpAuthorizationModule
+2023-10-06 20:57:10.806 +08:00 [INF]       - Volo.Abp.PermissionManagement.Identity.AbpPermissionManagementDomainIdentityModule
+2023-10-06 20:57:10.806 +08:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementDomainModule
+2023-10-06 20:57:10.806 +08:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementDomainModule
+2023-10-06 20:57:10.806 +08:00 [INF]       - Volo.Abp.Emailing.AbpEmailingModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.TextTemplating.AbpTextTemplatingModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.TextTemplating.Scriban.AbpTextTemplatingScribanModule
+2023-10-06 20:57:10.806 +08:00 [INF]             - Volo.Abp.TextTemplating.AbpTextTemplatingCoreModule
+2023-10-06 20:57:10.806 +08:00 [INF]     - Volo.Abp.Identity.EntityFrameworkCore.AbpIdentityEntityFrameworkCoreModule
+2023-10-06 20:57:10.806 +08:00 [INF]       - Volo.Abp.Users.EntityFrameworkCore.AbpUsersEntityFrameworkCoreModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2023-10-06 20:57:10.806 +08:00 [INF]     - Volo.Abp.OpenIddict.EntityFrameworkCore.AbpOpenIddictEntityFrameworkCoreModule
+2023-10-06 20:57:10.806 +08:00 [INF]     - Volo.Abp.PermissionManagement.EntityFrameworkCore.AbpPermissionManagementEntityFrameworkCoreModule
+2023-10-06 20:57:10.806 +08:00 [INF]     - Volo.Abp.SettingManagement.EntityFrameworkCore.AbpSettingManagementEntityFrameworkCoreModule
+2023-10-06 20:57:10.806 +08:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2023-10-06 20:57:10.806 +08:00 [INF]     - Volo.Abp.BackgroundJobs.EntityFrameworkCore.AbpBackgroundJobsEntityFrameworkCoreModule
+2023-10-06 20:57:10.806 +08:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2023-10-06 20:57:10.806 +08:00 [INF]     - Volo.Abp.TenantManagement.EntityFrameworkCore.AbpTenantManagementEntityFrameworkCoreModule
+2023-10-06 20:57:10.806 +08:00 [INF]     - Volo.Abp.FeatureManagement.EntityFrameworkCore.AbpFeatureManagementEntityFrameworkCoreModule
+2023-10-06 20:57:10.806 +08:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2023-10-06 20:57:10.806 +08:00 [INF]   - Volo.Abp.DistributedLocking.AbpDistributedLockingModule
+2023-10-06 20:57:10.806 +08:00 [INF]   - Volo.Abp.Account.Web.AbpAccountWebOpenIddictModule
+2023-10-06 20:57:10.806 +08:00 [INF]     - Volo.Abp.Account.Web.AbpAccountWebModule
+2023-10-06 20:57:10.806 +08:00 [INF]       - Volo.Abp.Account.AbpAccountApplicationContractsModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.Identity.AbpIdentityApplicationContractsModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.PermissionManagement.AbpPermissionManagementApplicationContractsModule
+2023-10-06 20:57:10.806 +08:00 [INF]             - Volo.Abp.Application.AbpDddApplicationContractsModule
+2023-10-06 20:57:10.806 +08:00 [INF]       - Volo.Abp.Identity.AspNetCore.AbpIdentityAspNetCoreModule
+2023-10-06 20:57:10.806 +08:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2023-10-06 20:57:10.806 +08:00 [INF]             - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2023-10-06 20:57:10.806 +08:00 [INF]               - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2023-10-06 20:57:10.806 +08:00 [INF]                 - Volo.Abp.Http.AbpHttpModule
+2023-10-06 20:57:10.806 +08:00 [INF]                   - Volo.Abp.Http.AbpHttpAbstractionsModule
+2023-10-06 20:57:10.806 +08:00 [INF]                   - Volo.Abp.Minify.AbpMinifyModule
+2023-10-06 20:57:10.806 +08:00 [INF]               - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2023-10-06 20:57:10.806 +08:00 [INF]               - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2023-10-06 20:57:10.806 +08:00 [INF]               - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2023-10-06 20:57:10.806 +08:00 [INF]                 - Volo.Abp.UI.AbpUiModule
+2023-10-06 20:57:10.806 +08:00 [INF]               - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2023-10-06 20:57:10.806 +08:00 [INF]               - Volo.Abp.Application.AbpDddApplicationModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2023-10-06 20:57:10.806 +08:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2023-10-06 20:57:10.806 +08:00 [INF]           - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2023-10-06 20:57:10.806 +08:00 [INF]     - Volo.Abp.OpenIddict.AbpOpenIddictAspNetCoreModule
+2023-10-06 20:57:10.806 +08:00 [INF]       - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2023-10-06 20:57:10.806 +08:00 [INF]   - Volo.Abp.Account.AbpAccountApplicationModule
+2023-10-06 20:57:10.806 +08:00 [INF]     - Volo.Abp.Identity.AbpIdentityApplicationModule
+2023-10-06 20:57:10.806 +08:00 [INF]       - Volo.Abp.PermissionManagement.AbpPermissionManagementApplicationModule
+2023-10-06 20:57:10.806 +08:00 [INF]   - Volo.Abp.Account.AbpAccountHttpApiModule
+2023-10-06 20:57:10.806 +08:00 [INF]     - Volo.Abp.Identity.AbpIdentityHttpApiModule
+2023-10-06 20:57:10.806 +08:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2023-10-06 20:57:11.311 +08:00 [DBG] Started background worker: Volo.Abp.OpenIddict.Tokens.TokenCleanupBackgroundWorker
+2023-10-06 20:57:11.893 +08:00 [INF] User profile is available. Using 'C:\Users\Administrator\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-10-06 20:57:12.107 +08:00 [INF] Initialized all ABP modules.
+2023-10-06 20:57:12.230 +08:00 [INF] Now listening on: https://localhost:7248
+2023-10-06 20:57:12.232 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-10-06 20:57:12.234 +08:00 [INF] Hosting environment: Development
+2023-10-06 20:57:12.235 +08:00 [INF] Content root path: C:\Users\Administrator\source\repos\qq2867199593\Acme.Blog\src\Acme.Blog.AuthServer.Blazor
+2023-10-06 20:57:13.546 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7248/ - -
+2023-10-06 20:57:24.634 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessRequestContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ResolveRequestUri.
+2023-10-06 20:57:24.646 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ResolveRequestUri.
+2023-10-06 20:57:24.648 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.OpenIddictServerHandlers+InferEndpointType.
+2023-10-06 20:57:24.650 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ValidateTransportSecurityRequirement.
+2023-10-06 20:57:24.650 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ValidateHostHeader.
+2023-10-06 20:57:24.668 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ValidateHostHeader.
+2023-10-06 20:57:24.669 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.OpenIddictValidationHandlers+EvaluateValidatedTokens.
+2023-10-06 20:57:24.670 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromAuthorizationHeader.
+2023-10-06 20:57:24.671 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromBodyForm.
+2023-10-06 20:57:24.683 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromQueryString.
+2023-10-06 20:57:24.685 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.OpenIddictValidationHandlers+ValidateRequiredTokens.
+2023-10-06 20:57:24.685 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was marked as rejected by OpenIddict.Validation.OpenIddictValidationHandlers+ValidateRequiredTokens.
+2023-10-06 20:57:24.686 +08:00 [DBG] AuthenticationScheme: OpenIddict.Validation.AspNetCore was not authenticated.
+2023-10-06 20:57:25.112 +08:00 [INF] Executing endpoint '/_Host'
+2023-10-06 20:57:25.133 +08:00 [INF] Route matched with {page = "/_Host", area = "", action = "", controller = ""}. Executing page /_Host
+2023-10-06 20:57:25.136 +08:00 [INF] Skipping the execution of current filter as its not the most effective filter implementing the policy Microsoft.AspNetCore.Mvc.ViewFeatures.IAntiforgeryPolicy
+2023-10-06 20:57:25.171 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2023-10-06 20:57:25.171 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2023-10-06 20:57:25.196 +08:00 [INF] Executed page /_Host in 60.3451ms
+2023-10-06 20:57:25.199 +08:00 [INF] Executed endpoint '/_Host'
+2023-10-06 20:57:25.501 +08:00 [DBG] Added 0 entity changes to the current audit log
+2023-10-06 20:57:25.503 +08:00 [DBG] Added 0 entity changes to the current audit log
+2023-10-06 20:57:25.504 +08:00 [DBG] Added 0 entity changes to the current audit log
+2023-10-06 20:57:25.520 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+Volo.Abp.AbpException: No theme registered! Use AbpThemingOptions to register themes.
+   at Volo.Abp.AspNetCore.Mvc.UI.Theming.DefaultThemeSelector.GetCurrentThemeInfo()
+   at Volo.Abp.AspNetCore.Mvc.UI.Theming.DefaultThemeManager.GetCurrentTheme()
+   at Volo.Abp.AspNetCore.Mvc.UI.Theming.DefaultThemeManager.get_CurrentTheme()
+   at AspNetCoreGeneratedDocument.Pages__ViewStart.ExecuteAsync()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderViewStartsAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeResultAsync>g__Logged|22_0(ResourceInvoker invoker, IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Volo.Abp.AspNetCore.Serilog.AbpSerilogMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Volo.Abp.AspNetCore.Auditing.AbpAuditingMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Volo.Abp.AspNetCore.Auditing.AbpAuditingMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Volo.Abp.AspNetCore.Uow.AbpUnitOfWorkMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Volo.Abp.AspNetCore.ExceptionHandling.AbpExceptionHandlingMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Volo.Abp.AspNetCore.ExceptionHandling.AbpExceptionHandlingMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Volo.Abp.AspNetCore.MultiTenancy.MultiTenancyMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Builder.ApplicationBuilderAbpOpenIddictMiddlewareExtension.<>c__DisplayClass0_0.<<UseAbpOpenIddictValidation>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Volo.Abp.AspNetCore.Tracing.AbpCorrelationIdMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RequestLocalization.AbpRequestLocalizationMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2023-10-06 20:57:25.714 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7248/ - - - 500 - text/html;+charset=utf-8 12168.2395ms
+2023-10-06 20:57:25.757 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7248/_vs/browserLink - -
+2023-10-06 20:57:25.763 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7248/_framework/aspnetcore-browser-refresh.js - -
+2023-10-06 20:57:25.781 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7248/_framework/aspnetcore-browser-refresh.js - - - 200 12386 application/javascript;+charset=utf-8 17.8934ms
+2023-10-06 20:57:25.814 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7248/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 56.8258ms
+2023-10-06 20:57:25.844 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7248/favicon.ico - -
+2023-10-06 20:57:25.854 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessRequestContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ResolveRequestUri.
+2023-10-06 20:57:25.855 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ResolveRequestUri.
+2023-10-06 20:57:25.855 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.OpenIddictServerHandlers+InferEndpointType.
+2023-10-06 20:57:25.855 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ValidateTransportSecurityRequirement.
+2023-10-06 20:57:25.855 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ValidateHostHeader.
+2023-10-06 20:57:25.856 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ValidateHostHeader.
+2023-10-06 20:57:25.856 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.OpenIddictValidationHandlers+EvaluateValidatedTokens.
+2023-10-06 20:57:25.856 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromAuthorizationHeader.
+2023-10-06 20:57:25.856 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromBodyForm.
+2023-10-06 20:57:25.856 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromQueryString.
+2023-10-06 20:57:25.856 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.OpenIddictValidationHandlers+ValidateRequiredTokens.
+2023-10-06 20:57:25.856 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was marked as rejected by OpenIddict.Validation.OpenIddictValidationHandlers+ValidateRequiredTokens.
+2023-10-06 20:57:25.856 +08:00 [DBG] AuthenticationScheme: OpenIddict.Validation.AspNetCore was not authenticated.
+2023-10-06 20:57:25.860 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7248/favicon.ico - - - 404 0 - 16.2295ms
+2023-10-06 21:02:32.939 +08:00 [INF] Starting Acme.Blog.AuthServer.Blazor
+2023-10-06 21:02:35.846 +08:00 [INF] Loaded ABP modules:
+2023-10-06 21:02:35.847 +08:00 [INF] - Acme.Blog.BlogAuthServerBlazorModule
+2023-10-06 21:02:35.848 +08:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2023-10-06 21:02:35.848 +08:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2023-10-06 21:02:35.848 +08:00 [INF]   - Acme.EntityFrameworkCore.BlogEntityFrameworkCoreModule
+2023-10-06 21:02:35.848 +08:00 [INF]     - Acme.BlogDomainModule
+2023-10-06 21:02:35.848 +08:00 [INF]       - Acme.BlogDomainSharedModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.Validation.AbpValidationModule
+2023-10-06 21:02:35.848 +08:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2023-10-06 21:02:35.848 +08:00 [INF]             - Volo.Abp.Localization.AbpLocalizationModule
+2023-10-06 21:02:35.848 +08:00 [INF]               - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2023-10-06 21:02:35.848 +08:00 [INF]               - Volo.Abp.Settings.AbpSettingsModule
+2023-10-06 21:02:35.848 +08:00 [INF]                 - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2023-10-06 21:02:35.848 +08:00 [INF]                 - Volo.Abp.Security.AbpSecurityModule
+2023-10-06 21:02:35.848 +08:00 [INF]                 - Volo.Abp.Data.AbpDataModule
+2023-10-06 21:02:35.848 +08:00 [INF]                   - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2023-10-06 21:02:35.848 +08:00 [INF]                   - Volo.Abp.Uow.AbpUnitOfWorkModule
+2023-10-06 21:02:35.848 +08:00 [INF]                   - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2023-10-06 21:02:35.848 +08:00 [INF]               - Volo.Abp.Threading.AbpThreadingModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainSharedModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainSharedModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.Json.SystemTextJson.AbpJsonSystemTextJsonModule
+2023-10-06 21:02:35.848 +08:00 [INF]             - Volo.Abp.Json.AbpJsonAbstractionsModule
+2023-10-06 21:02:35.848 +08:00 [INF]             - Volo.Abp.Timing.AbpTimingModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.Identity.AbpIdentityDomainSharedModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.Users.AbpUsersDomainSharedModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.Features.AbpFeaturesModule
+2023-10-06 21:02:35.848 +08:00 [INF]             - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2023-10-06 21:02:35.848 +08:00 [INF]               - Volo.Abp.MultiTenancy.AbpMultiTenancyAbstractionsModule
+2023-10-06 21:02:35.848 +08:00 [INF]             - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.OpenIddict.AbpOpenIddictDomainSharedModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainSharedModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.SettingManagement.AbpSettingManagementDomainSharedModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.TenantManagement.AbpTenantManagementDomainSharedModule
+2023-10-06 21:02:35.848 +08:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.Auditing.AbpAuditingModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.Json.AbpJsonModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.Auditing.AbpAuditingContractsModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.Domain.AbpDddDomainModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.EventBus.AbpEventBusModule
+2023-10-06 21:02:35.848 +08:00 [INF]             - Volo.Abp.Guids.AbpGuidsModule
+2023-10-06 21:02:35.848 +08:00 [INF]             - Volo.Abp.BackgroundWorkers.AbpBackgroundWorkersModule
+2023-10-06 21:02:35.848 +08:00 [INF]             - Volo.Abp.DistributedLocking.AbpDistributedLockingAbstractionsModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.Specifications.AbpSpecificationsModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.Caching.AbpCachingModule
+2023-10-06 21:02:35.848 +08:00 [INF]             - Volo.Abp.Serialization.AbpSerializationModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.Domain.AbpDddDomainSharedModule
+2023-10-06 21:02:35.848 +08:00 [INF]       - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.BackgroundJobs.AbpBackgroundJobsAbstractionsModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2023-10-06 21:02:35.848 +08:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainModule
+2023-10-06 21:02:35.848 +08:00 [INF]       - Volo.Abp.Identity.AbpIdentityDomainModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.Users.AbpUsersDomainModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.Users.AbpUsersAbstractionModule
+2023-10-06 21:02:35.848 +08:00 [INF]       - Volo.Abp.OpenIddict.AbpOpenIddictDomainModule
+2023-10-06 21:02:35.848 +08:00 [INF]       - Volo.Abp.PermissionManagement.OpenIddict.AbpPermissionManagementDomainOpenIddictModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.Authorization.AbpAuthorizationModule
+2023-10-06 21:02:35.848 +08:00 [INF]       - Volo.Abp.PermissionManagement.Identity.AbpPermissionManagementDomainIdentityModule
+2023-10-06 21:02:35.848 +08:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementDomainModule
+2023-10-06 21:02:35.848 +08:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementDomainModule
+2023-10-06 21:02:35.848 +08:00 [INF]       - Volo.Abp.Emailing.AbpEmailingModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.TextTemplating.AbpTextTemplatingModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.TextTemplating.Scriban.AbpTextTemplatingScribanModule
+2023-10-06 21:02:35.848 +08:00 [INF]             - Volo.Abp.TextTemplating.AbpTextTemplatingCoreModule
+2023-10-06 21:02:35.848 +08:00 [INF]     - Volo.Abp.Identity.EntityFrameworkCore.AbpIdentityEntityFrameworkCoreModule
+2023-10-06 21:02:35.848 +08:00 [INF]       - Volo.Abp.Users.EntityFrameworkCore.AbpUsersEntityFrameworkCoreModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2023-10-06 21:02:35.848 +08:00 [INF]     - Volo.Abp.OpenIddict.EntityFrameworkCore.AbpOpenIddictEntityFrameworkCoreModule
+2023-10-06 21:02:35.848 +08:00 [INF]     - Volo.Abp.PermissionManagement.EntityFrameworkCore.AbpPermissionManagementEntityFrameworkCoreModule
+2023-10-06 21:02:35.848 +08:00 [INF]     - Volo.Abp.SettingManagement.EntityFrameworkCore.AbpSettingManagementEntityFrameworkCoreModule
+2023-10-06 21:02:35.848 +08:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2023-10-06 21:02:35.848 +08:00 [INF]     - Volo.Abp.BackgroundJobs.EntityFrameworkCore.AbpBackgroundJobsEntityFrameworkCoreModule
+2023-10-06 21:02:35.848 +08:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2023-10-06 21:02:35.848 +08:00 [INF]     - Volo.Abp.TenantManagement.EntityFrameworkCore.AbpTenantManagementEntityFrameworkCoreModule
+2023-10-06 21:02:35.848 +08:00 [INF]     - Volo.Abp.FeatureManagement.EntityFrameworkCore.AbpFeatureManagementEntityFrameworkCoreModule
+2023-10-06 21:02:35.848 +08:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2023-10-06 21:02:35.848 +08:00 [INF]   - Volo.Abp.DistributedLocking.AbpDistributedLockingModule
+2023-10-06 21:02:35.848 +08:00 [INF]   - Volo.Abp.Account.Web.AbpAccountWebOpenIddictModule
+2023-10-06 21:02:35.848 +08:00 [INF]     - Volo.Abp.Account.Web.AbpAccountWebModule
+2023-10-06 21:02:35.848 +08:00 [INF]       - Volo.Abp.Account.AbpAccountApplicationContractsModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.Identity.AbpIdentityApplicationContractsModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.PermissionManagement.AbpPermissionManagementApplicationContractsModule
+2023-10-06 21:02:35.848 +08:00 [INF]             - Volo.Abp.Application.AbpDddApplicationContractsModule
+2023-10-06 21:02:35.848 +08:00 [INF]       - Volo.Abp.Identity.AspNetCore.AbpIdentityAspNetCoreModule
+2023-10-06 21:02:35.848 +08:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2023-10-06 21:02:35.848 +08:00 [INF]             - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2023-10-06 21:02:35.848 +08:00 [INF]               - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2023-10-06 21:02:35.848 +08:00 [INF]                 - Volo.Abp.Http.AbpHttpModule
+2023-10-06 21:02:35.848 +08:00 [INF]                   - Volo.Abp.Http.AbpHttpAbstractionsModule
+2023-10-06 21:02:35.848 +08:00 [INF]                   - Volo.Abp.Minify.AbpMinifyModule
+2023-10-06 21:02:35.848 +08:00 [INF]               - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2023-10-06 21:02:35.848 +08:00 [INF]               - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2023-10-06 21:02:35.848 +08:00 [INF]               - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2023-10-06 21:02:35.848 +08:00 [INF]                 - Volo.Abp.UI.AbpUiModule
+2023-10-06 21:02:35.848 +08:00 [INF]               - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2023-10-06 21:02:35.848 +08:00 [INF]               - Volo.Abp.Application.AbpDddApplicationModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2023-10-06 21:02:35.848 +08:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2023-10-06 21:02:35.848 +08:00 [INF]           - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2023-10-06 21:02:35.848 +08:00 [INF]     - Volo.Abp.OpenIddict.AbpOpenIddictAspNetCoreModule
+2023-10-06 21:02:35.848 +08:00 [INF]       - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2023-10-06 21:02:35.848 +08:00 [INF]   - Volo.Abp.Account.AbpAccountApplicationModule
+2023-10-06 21:02:35.848 +08:00 [INF]     - Volo.Abp.Identity.AbpIdentityApplicationModule
+2023-10-06 21:02:35.848 +08:00 [INF]       - Volo.Abp.PermissionManagement.AbpPermissionManagementApplicationModule
+2023-10-06 21:02:35.848 +08:00 [INF]   - Volo.Abp.Account.AbpAccountHttpApiModule
+2023-10-06 21:02:35.848 +08:00 [INF]     - Volo.Abp.Identity.AbpIdentityHttpApiModule
+2023-10-06 21:02:35.848 +08:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2023-10-06 21:02:36.037 +08:00 [DBG] Started background worker: Volo.Abp.OpenIddict.Tokens.TokenCleanupBackgroundWorker
+2023-10-06 21:02:36.553 +08:00 [INF] User profile is available. Using 'C:\Users\Administrator\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-10-06 21:02:36.796 +08:00 [INF] Initialized all ABP modules.
+2023-10-06 21:02:36.882 +08:00 [INF] Now listening on: https://localhost:7248
+2023-10-06 21:02:36.882 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-10-06 21:02:36.882 +08:00 [INF] Hosting environment: Development
+2023-10-06 21:02:36.882 +08:00 [INF] Content root path: C:\Users\Administrator\source\repos\qq2867199593\Acme.Blog\src\Acme.Blog.AuthServer.Blazor
+2023-10-06 21:02:37.450 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7248/ - -
+2023-10-06 21:02:39.724 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessRequestContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ResolveRequestUri.
+2023-10-06 21:02:39.735 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ResolveRequestUri.
+2023-10-06 21:02:39.738 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.OpenIddictServerHandlers+InferEndpointType.
+2023-10-06 21:02:39.739 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ValidateTransportSecurityRequirement.
+2023-10-06 21:02:39.739 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ValidateHostHeader.
+2023-10-06 21:02:39.749 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ValidateHostHeader.
+2023-10-06 21:02:39.750 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.OpenIddictValidationHandlers+EvaluateValidatedTokens.
+2023-10-06 21:02:39.750 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromAuthorizationHeader.
+2023-10-06 21:02:39.751 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromBodyForm.
+2023-10-06 21:02:39.762 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromQueryString.
+2023-10-06 21:02:39.763 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.OpenIddictValidationHandlers+ValidateRequiredTokens.
+2023-10-06 21:02:39.763 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was marked as rejected by OpenIddict.Validation.OpenIddictValidationHandlers+ValidateRequiredTokens.
+2023-10-06 21:02:39.764 +08:00 [DBG] AuthenticationScheme: OpenIddict.Validation.AspNetCore was not authenticated.
+2023-10-06 21:02:40.199 +08:00 [INF] Executing endpoint '/_Host'
+2023-10-06 21:02:40.213 +08:00 [INF] Route matched with {page = "/_Host", area = "", action = "", controller = ""}. Executing page /_Host
+2023-10-06 21:02:40.214 +08:00 [INF] Skipping the execution of current filter as its not the most effective filter implementing the policy Microsoft.AspNetCore.Mvc.ViewFeatures.IAntiforgeryPolicy
+2023-10-06 21:02:40.231 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2023-10-06 21:02:40.232 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2023-10-06 21:02:40.248 +08:00 [INF] Executed page /_Host in 32.266ms
+2023-10-06 21:02:40.248 +08:00 [INF] Executed endpoint '/_Host'
+2023-10-06 21:02:42.168 +08:00 [DBG] Added 0 entity changes to the current audit log
+2023-10-06 21:02:42.169 +08:00 [DBG] Added 0 entity changes to the current audit log
+2023-10-06 21:02:42.179 +08:00 [DBG] Added 0 entity changes to the current audit log
+2023-10-06 21:02:42.192 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+Volo.Abp.AbpException: No theme registered! Use AbpThemingOptions to register themes.
+   at Volo.Abp.AspNetCore.Mvc.UI.Theming.DefaultThemeSelector.GetCurrentThemeInfo()
+   at Volo.Abp.AspNetCore.Mvc.UI.Theming.DefaultThemeManager.GetCurrentTheme()
+   at Volo.Abp.AspNetCore.Mvc.UI.Theming.DefaultThemeManager.get_CurrentTheme()
+   at AspNetCoreGeneratedDocument.Pages__ViewStart.ExecuteAsync()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderViewStartsAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeResultAsync>g__Logged|22_0(ResourceInvoker invoker, IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Volo.Abp.AspNetCore.Serilog.AbpSerilogMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Volo.Abp.AspNetCore.Auditing.AbpAuditingMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Volo.Abp.AspNetCore.Auditing.AbpAuditingMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Volo.Abp.AspNetCore.Uow.AbpUnitOfWorkMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Volo.Abp.AspNetCore.ExceptionHandling.AbpExceptionHandlingMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Volo.Abp.AspNetCore.ExceptionHandling.AbpExceptionHandlingMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Volo.Abp.AspNetCore.MultiTenancy.MultiTenancyMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Builder.ApplicationBuilderAbpOpenIddictMiddlewareExtension.<>c__DisplayClass0_0.<<UseAbpOpenIddictValidation>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Volo.Abp.AspNetCore.Tracing.AbpCorrelationIdMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RequestLocalization.AbpRequestLocalizationMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2023-10-06 21:02:42.303 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7248/ - - - 500 - text/html;+charset=utf-8 4853.1742ms
+2023-10-06 21:02:42.306 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7248/_framework/aspnetcore-browser-refresh.js - -
+2023-10-06 21:02:42.306 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7248/_vs/browserLink - -
+2023-10-06 21:02:42.326 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7248/_framework/aspnetcore-browser-refresh.js - - - 200 12386 application/javascript;+charset=utf-8 19.8310ms
+2023-10-06 21:02:42.335 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7248/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 29.3703ms
+2023-10-06 21:02:42.372 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7248/favicon.ico - -
+2023-10-06 21:02:42.378 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessRequestContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ResolveRequestUri.
+2023-10-06 21:02:42.379 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ResolveRequestUri.
+2023-10-06 21:02:42.379 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.OpenIddictServerHandlers+InferEndpointType.
+2023-10-06 21:02:42.379 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ValidateTransportSecurityRequirement.
+2023-10-06 21:02:42.379 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ValidateHostHeader.
+2023-10-06 21:02:42.379 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ValidateHostHeader.
+2023-10-06 21:02:42.379 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.OpenIddictValidationHandlers+EvaluateValidatedTokens.
+2023-10-06 21:02:42.379 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromAuthorizationHeader.
+2023-10-06 21:02:42.379 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromBodyForm.
+2023-10-06 21:02:42.379 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromQueryString.
+2023-10-06 21:02:42.379 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.OpenIddictValidationHandlers+ValidateRequiredTokens.
+2023-10-06 21:02:42.379 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was marked as rejected by OpenIddict.Validation.OpenIddictValidationHandlers+ValidateRequiredTokens.
+2023-10-06 21:02:42.380 +08:00 [DBG] AuthenticationScheme: OpenIddict.Validation.AspNetCore was not authenticated.
+2023-10-06 21:02:42.382 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7248/favicon.ico - - - 404 0 - 10.0718ms
+2023-10-06 21:03:26.810 +08:00 [INF] Starting Acme.Blog.AuthServer.Blazor
+2023-10-06 21:03:29.302 +08:00 [INF] Loaded ABP modules:
+2023-10-06 21:03:29.303 +08:00 [INF] - Acme.Blog.BlogAuthServerBlazorModule
+2023-10-06 21:03:29.303 +08:00 [INF]   - Volo.Abp.Autofac.AbpAutofacModule
+2023-10-06 21:03:29.303 +08:00 [INF]     - Volo.Abp.Castle.AbpCastleCoreModule
+2023-10-06 21:03:29.303 +08:00 [INF]   - Acme.EntityFrameworkCore.BlogEntityFrameworkCoreModule
+2023-10-06 21:03:29.303 +08:00 [INF]     - Acme.BlogDomainModule
+2023-10-06 21:03:29.303 +08:00 [INF]       - Acme.BlogDomainSharedModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.AuditLogging.AbpAuditLoggingDomainSharedModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.Validation.AbpValidationModule
+2023-10-06 21:03:29.303 +08:00 [INF]             - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2023-10-06 21:03:29.303 +08:00 [INF]             - Volo.Abp.Localization.AbpLocalizationModule
+2023-10-06 21:03:29.303 +08:00 [INF]               - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2023-10-06 21:03:29.303 +08:00 [INF]               - Volo.Abp.Settings.AbpSettingsModule
+2023-10-06 21:03:29.303 +08:00 [INF]                 - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2023-10-06 21:03:29.303 +08:00 [INF]                 - Volo.Abp.Security.AbpSecurityModule
+2023-10-06 21:03:29.303 +08:00 [INF]                 - Volo.Abp.Data.AbpDataModule
+2023-10-06 21:03:29.303 +08:00 [INF]                   - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2023-10-06 21:03:29.303 +08:00 [INF]                   - Volo.Abp.Uow.AbpUnitOfWorkModule
+2023-10-06 21:03:29.303 +08:00 [INF]                   - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2023-10-06 21:03:29.303 +08:00 [INF]               - Volo.Abp.Threading.AbpThreadingModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainSharedModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainSharedModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.Json.SystemTextJson.AbpJsonSystemTextJsonModule
+2023-10-06 21:03:29.303 +08:00 [INF]             - Volo.Abp.Json.AbpJsonAbstractionsModule
+2023-10-06 21:03:29.303 +08:00 [INF]             - Volo.Abp.Timing.AbpTimingModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.Identity.AbpIdentityDomainSharedModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.Users.AbpUsersDomainSharedModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.Features.AbpFeaturesModule
+2023-10-06 21:03:29.303 +08:00 [INF]             - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2023-10-06 21:03:29.303 +08:00 [INF]               - Volo.Abp.MultiTenancy.AbpMultiTenancyAbstractionsModule
+2023-10-06 21:03:29.303 +08:00 [INF]             - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.OpenIddict.AbpOpenIddictDomainSharedModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainSharedModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.SettingManagement.AbpSettingManagementDomainSharedModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.TenantManagement.AbpTenantManagementDomainSharedModule
+2023-10-06 21:03:29.303 +08:00 [INF]       - Volo.Abp.AuditLogging.AbpAuditLoggingDomainModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.Auditing.AbpAuditingModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.Json.AbpJsonModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.Auditing.AbpAuditingContractsModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.Domain.AbpDddDomainModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.EventBus.AbpEventBusModule
+2023-10-06 21:03:29.303 +08:00 [INF]             - Volo.Abp.Guids.AbpGuidsModule
+2023-10-06 21:03:29.303 +08:00 [INF]             - Volo.Abp.BackgroundWorkers.AbpBackgroundWorkersModule
+2023-10-06 21:03:29.303 +08:00 [INF]             - Volo.Abp.DistributedLocking.AbpDistributedLockingAbstractionsModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.Specifications.AbpSpecificationsModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.Caching.AbpCachingModule
+2023-10-06 21:03:29.303 +08:00 [INF]             - Volo.Abp.Serialization.AbpSerializationModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.Domain.AbpDddDomainSharedModule
+2023-10-06 21:03:29.303 +08:00 [INF]       - Volo.Abp.BackgroundJobs.AbpBackgroundJobsDomainModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.BackgroundJobs.AbpBackgroundJobsModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.BackgroundJobs.AbpBackgroundJobsAbstractionsModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.AutoMapper.AbpAutoMapperModule
+2023-10-06 21:03:29.303 +08:00 [INF]       - Volo.Abp.FeatureManagement.AbpFeatureManagementDomainModule
+2023-10-06 21:03:29.303 +08:00 [INF]       - Volo.Abp.Identity.AbpIdentityDomainModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.Users.AbpUsersDomainModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.Users.AbpUsersAbstractionModule
+2023-10-06 21:03:29.303 +08:00 [INF]       - Volo.Abp.OpenIddict.AbpOpenIddictDomainModule
+2023-10-06 21:03:29.303 +08:00 [INF]       - Volo.Abp.PermissionManagement.OpenIddict.AbpPermissionManagementDomainOpenIddictModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.PermissionManagement.AbpPermissionManagementDomainModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.Authorization.AbpAuthorizationModule
+2023-10-06 21:03:29.303 +08:00 [INF]       - Volo.Abp.PermissionManagement.Identity.AbpPermissionManagementDomainIdentityModule
+2023-10-06 21:03:29.303 +08:00 [INF]       - Volo.Abp.SettingManagement.AbpSettingManagementDomainModule
+2023-10-06 21:03:29.303 +08:00 [INF]       - Volo.Abp.TenantManagement.AbpTenantManagementDomainModule
+2023-10-06 21:03:29.303 +08:00 [INF]       - Volo.Abp.Emailing.AbpEmailingModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.TextTemplating.AbpTextTemplatingModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.TextTemplating.Scriban.AbpTextTemplatingScribanModule
+2023-10-06 21:03:29.303 +08:00 [INF]             - Volo.Abp.TextTemplating.AbpTextTemplatingCoreModule
+2023-10-06 21:03:29.303 +08:00 [INF]     - Volo.Abp.Identity.EntityFrameworkCore.AbpIdentityEntityFrameworkCoreModule
+2023-10-06 21:03:29.303 +08:00 [INF]       - Volo.Abp.Users.EntityFrameworkCore.AbpUsersEntityFrameworkCoreModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule
+2023-10-06 21:03:29.303 +08:00 [INF]     - Volo.Abp.OpenIddict.EntityFrameworkCore.AbpOpenIddictEntityFrameworkCoreModule
+2023-10-06 21:03:29.303 +08:00 [INF]     - Volo.Abp.PermissionManagement.EntityFrameworkCore.AbpPermissionManagementEntityFrameworkCoreModule
+2023-10-06 21:03:29.303 +08:00 [INF]     - Volo.Abp.SettingManagement.EntityFrameworkCore.AbpSettingManagementEntityFrameworkCoreModule
+2023-10-06 21:03:29.303 +08:00 [INF]     - Volo.Abp.EntityFrameworkCore.SqlServer.AbpEntityFrameworkCoreSqlServerModule
+2023-10-06 21:03:29.303 +08:00 [INF]     - Volo.Abp.BackgroundJobs.EntityFrameworkCore.AbpBackgroundJobsEntityFrameworkCoreModule
+2023-10-06 21:03:29.303 +08:00 [INF]     - Volo.Abp.AuditLogging.EntityFrameworkCore.AbpAuditLoggingEntityFrameworkCoreModule
+2023-10-06 21:03:29.303 +08:00 [INF]     - Volo.Abp.TenantManagement.EntityFrameworkCore.AbpTenantManagementEntityFrameworkCoreModule
+2023-10-06 21:03:29.303 +08:00 [INF]     - Volo.Abp.FeatureManagement.EntityFrameworkCore.AbpFeatureManagementEntityFrameworkCoreModule
+2023-10-06 21:03:29.303 +08:00 [INF]   - Volo.Abp.Caching.StackExchangeRedis.AbpCachingStackExchangeRedisModule
+2023-10-06 21:03:29.303 +08:00 [INF]   - Volo.Abp.DistributedLocking.AbpDistributedLockingModule
+2023-10-06 21:03:29.303 +08:00 [INF]   - Volo.Abp.Account.Web.AbpAccountWebOpenIddictModule
+2023-10-06 21:03:29.303 +08:00 [INF]     - Volo.Abp.Account.Web.AbpAccountWebModule
+2023-10-06 21:03:29.303 +08:00 [INF]       - Volo.Abp.Account.AbpAccountApplicationContractsModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.Identity.AbpIdentityApplicationContractsModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.PermissionManagement.AbpPermissionManagementApplicationContractsModule
+2023-10-06 21:03:29.303 +08:00 [INF]             - Volo.Abp.Application.AbpDddApplicationContractsModule
+2023-10-06 21:03:29.303 +08:00 [INF]       - Volo.Abp.Identity.AspNetCore.AbpIdentityAspNetCoreModule
+2023-10-06 21:03:29.303 +08:00 [INF]       - Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.AbpAspNetCoreMvcUiThemeSharedModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2023-10-06 21:03:29.303 +08:00 [INF]             - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2023-10-06 21:03:29.303 +08:00 [INF]               - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2023-10-06 21:03:29.303 +08:00 [INF]                 - Volo.Abp.Http.AbpHttpModule
+2023-10-06 21:03:29.303 +08:00 [INF]                   - Volo.Abp.Http.AbpHttpAbstractionsModule
+2023-10-06 21:03:29.303 +08:00 [INF]                   - Volo.Abp.Minify.AbpMinifyModule
+2023-10-06 21:03:29.303 +08:00 [INF]               - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2023-10-06 21:03:29.303 +08:00 [INF]               - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2023-10-06 21:03:29.303 +08:00 [INF]               - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2023-10-06 21:03:29.303 +08:00 [INF]                 - Volo.Abp.UI.AbpUiModule
+2023-10-06 21:03:29.303 +08:00 [INF]               - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2023-10-06 21:03:29.303 +08:00 [INF]               - Volo.Abp.Application.AbpDddApplicationModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Packages.AbpAspNetCoreMvcUiPackagesModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2023-10-06 21:03:29.303 +08:00 [INF]         - Volo.Abp.AspNetCore.Mvc.UI.Widgets.AbpAspNetCoreMvcUiWidgetsModule
+2023-10-06 21:03:29.303 +08:00 [INF]           - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2023-10-06 21:03:29.303 +08:00 [INF]     - Volo.Abp.OpenIddict.AbpOpenIddictAspNetCoreModule
+2023-10-06 21:03:29.303 +08:00 [INF]       - Volo.Abp.AspNetCore.MultiTenancy.AbpAspNetCoreMultiTenancyModule
+2023-10-06 21:03:29.303 +08:00 [INF]   - Volo.Abp.Account.AbpAccountApplicationModule
+2023-10-06 21:03:29.303 +08:00 [INF]     - Volo.Abp.Identity.AbpIdentityApplicationModule
+2023-10-06 21:03:29.303 +08:00 [INF]       - Volo.Abp.PermissionManagement.AbpPermissionManagementApplicationModule
+2023-10-06 21:03:29.303 +08:00 [INF]   - Volo.Abp.Account.AbpAccountHttpApiModule
+2023-10-06 21:03:29.303 +08:00 [INF]     - Volo.Abp.Identity.AbpIdentityHttpApiModule
+2023-10-06 21:03:29.303 +08:00 [INF]   - Volo.Abp.AspNetCore.Serilog.AbpAspNetCoreSerilogModule
+2023-10-06 21:03:29.485 +08:00 [DBG] Started background worker: Volo.Abp.OpenIddict.Tokens.TokenCleanupBackgroundWorker
+2023-10-06 21:03:29.895 +08:00 [INF] User profile is available. Using 'C:\Users\Administrator\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-10-06 21:03:30.108 +08:00 [INF] Initialized all ABP modules.
+2023-10-06 21:03:30.193 +08:00 [INF] Now listening on: https://localhost:7248
+2023-10-06 21:03:30.193 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-10-06 21:03:30.193 +08:00 [INF] Hosting environment: Development
+2023-10-06 21:03:30.193 +08:00 [INF] Content root path: C:\Users\Administrator\source\repos\qq2867199593\Acme.Blog\src\Acme.Blog.AuthServer.Blazor
+2023-10-06 21:03:30.922 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7248/ - -
+2023-10-06 21:03:33.581 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessRequestContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ResolveRequestUri.
+2023-10-06 21:03:33.591 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ResolveRequestUri.
+2023-10-06 21:03:33.594 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.OpenIddictServerHandlers+InferEndpointType.
+2023-10-06 21:03:33.595 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ValidateTransportSecurityRequirement.
+2023-10-06 21:03:33.595 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ValidateHostHeader.
+2023-10-06 21:03:33.604 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ValidateHostHeader.
+2023-10-06 21:03:33.604 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.OpenIddictValidationHandlers+EvaluateValidatedTokens.
+2023-10-06 21:03:33.605 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromAuthorizationHeader.
+2023-10-06 21:03:33.605 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromBodyForm.
+2023-10-06 21:03:33.613 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromQueryString.
+2023-10-06 21:03:33.614 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.OpenIddictValidationHandlers+ValidateRequiredTokens.
+2023-10-06 21:03:33.614 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was marked as rejected by OpenIddict.Validation.OpenIddictValidationHandlers+ValidateRequiredTokens.
+2023-10-06 21:03:33.615 +08:00 [DBG] AuthenticationScheme: OpenIddict.Validation.AspNetCore was not authenticated.
+2023-10-06 21:03:33.989 +08:00 [INF] Executing endpoint '/_Host'
+2023-10-06 21:03:34.014 +08:00 [INF] Route matched with {page = "/_Host", area = "", action = "", controller = ""}. Executing page /_Host
+2023-10-06 21:03:34.016 +08:00 [INF] Skipping the execution of current filter as its not the most effective filter implementing the policy Microsoft.AspNetCore.Mvc.ViewFeatures.IAntiforgeryPolicy
+2023-10-06 21:03:34.049 +08:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2023-10-06 21:03:34.049 +08:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2023-10-06 21:03:34.081 +08:00 [INF] Executed page /_Host in 64.6807ms
+2023-10-06 21:03:34.082 +08:00 [INF] Executed endpoint '/_Host'
+2023-10-06 21:03:35.940 +08:00 [DBG] Added 0 entity changes to the current audit log
+2023-10-06 21:03:35.941 +08:00 [DBG] Added 0 entity changes to the current audit log
+2023-10-06 21:03:35.949 +08:00 [DBG] Added 0 entity changes to the current audit log
+2023-10-06 21:03:35.959 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+Volo.Abp.AbpException: No theme registered! Use AbpThemingOptions to register themes.
+   at Volo.Abp.AspNetCore.Mvc.UI.Theming.DefaultThemeSelector.GetCurrentThemeInfo()
+   at Volo.Abp.AspNetCore.Mvc.UI.Theming.DefaultThemeManager.GetCurrentTheme()
+   at Volo.Abp.AspNetCore.Mvc.UI.Theming.DefaultThemeManager.get_CurrentTheme()
+   at AspNetCoreGeneratedDocument.Pages__ViewStart.ExecuteAsync()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderViewStartsAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeResultAsync>g__Logged|22_0(ResourceInvoker invoker, IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Volo.Abp.AspNetCore.Serilog.AbpSerilogMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Volo.Abp.AspNetCore.Auditing.AbpAuditingMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Volo.Abp.AspNetCore.Auditing.AbpAuditingMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Volo.Abp.AspNetCore.Uow.AbpUnitOfWorkMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Volo.Abp.AspNetCore.ExceptionHandling.AbpExceptionHandlingMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Volo.Abp.AspNetCore.ExceptionHandling.AbpExceptionHandlingMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Volo.Abp.AspNetCore.MultiTenancy.MultiTenancyMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Builder.ApplicationBuilderAbpOpenIddictMiddlewareExtension.<>c__DisplayClass0_0.<<UseAbpOpenIddictValidation>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Volo.Abp.AspNetCore.Tracing.AbpCorrelationIdMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RequestLocalization.AbpRequestLocalizationMiddleware.InvokeAsync(HttpContext context, RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass6_1.<<UseMiddlewareInterface>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2023-10-06 21:03:36.090 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7248/ - - - 500 - text/html;+charset=utf-8 5168.4963ms
+2023-10-06 21:03:36.099 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7248/_framework/aspnetcore-browser-refresh.js - -
+2023-10-06 21:03:36.100 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7248/_vs/browserLink - -
+2023-10-06 21:03:36.113 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7248/_framework/aspnetcore-browser-refresh.js - - - 200 12386 application/javascript;+charset=utf-8 13.7865ms
+2023-10-06 21:03:36.122 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7248/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 21.8174ms
+2023-10-06 21:03:36.160 +08:00 [INF] Request starting HTTP/2 GET https://localhost:7248/favicon.ico - -
+2023-10-06 21:03:36.169 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessRequestContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ResolveRequestUri.
+2023-10-06 21:03:36.170 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ResolveRequestUri.
+2023-10-06 21:03:36.170 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.OpenIddictServerHandlers+InferEndpointType.
+2023-10-06 21:03:36.170 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ValidateTransportSecurityRequirement.
+2023-10-06 21:03:36.170 +08:00 [DBG] The event OpenIddict.Server.OpenIddictServerEvents+ProcessRequestContext was successfully processed by OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers+ValidateHostHeader.
+2023-10-06 21:03:36.171 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ValidateHostHeader.
+2023-10-06 21:03:36.171 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.OpenIddictValidationHandlers+EvaluateValidatedTokens.
+2023-10-06 21:03:36.171 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromAuthorizationHeader.
+2023-10-06 21:03:36.171 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromBodyForm.
+2023-10-06 21:03:36.171 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreHandlers+ExtractAccessTokenFromQueryString.
+2023-10-06 21:03:36.171 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was successfully processed by OpenIddict.Validation.OpenIddictValidationHandlers+ValidateRequiredTokens.
+2023-10-06 21:03:36.171 +08:00 [DBG] The event OpenIddict.Validation.OpenIddictValidationEvents+ProcessAuthenticationContext was marked as rejected by OpenIddict.Validation.OpenIddictValidationHandlers+ValidateRequiredTokens.
+2023-10-06 21:03:36.171 +08:00 [DBG] AuthenticationScheme: OpenIddict.Validation.AspNetCore was not authenticated.
+2023-10-06 21:03:36.175 +08:00 [INF] Request finished HTTP/2 GET https://localhost:7248/favicon.ico - - - 404 0 - 15.5789ms

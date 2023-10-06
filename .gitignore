@@ -260,3 +260,5 @@ src/Acme.Blog.Front.Blazor/Logs/*
 
 # Use abp install-libs to restore.
 **/wwwroot/libs/*
+/src/Acme.Blog.AuthServer.Blazor/appsettings.Development.json
+/src/Acme.Blog.DbMigrator/appsettings.secrets.json

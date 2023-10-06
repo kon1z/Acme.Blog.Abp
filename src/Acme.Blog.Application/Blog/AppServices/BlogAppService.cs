@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Acme.Blog.Dtos;
 using Acme.Blog.Entities;
 using Acme.Blog.IAppServices;
 using Acme.Blog.IRepositories;

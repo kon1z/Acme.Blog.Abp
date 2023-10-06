@@ -1,4 +1,4 @@
-﻿namespace Acme.Blog.AppServices;
+﻿namespace Acme.Blog.Dtos;
 
 public class ArticleDetailDto : ArticleDto
 {

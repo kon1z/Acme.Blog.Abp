@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Acme.Blog.AppServices;
+using Acme.Blog.Dtos;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 
