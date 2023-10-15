@@ -33,6 +33,9 @@ public class BlogDbContext :
 
     public DbSet<Article> Articles { get; set; }
 
+    public DbSet<Lable> Lables { get; set; }
+
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -66,6 +69,16 @@ public class BlogDbContext :
 
             b.ConfigureByConvention();
         });
+
+        builder.Entity<Lable>(r =>
+        {
+            r.ToTable(BlogConsts.DbTablePrefix + "Lable", BlogConsts.DbSchema);
+
+            r.Property(x => x.Name).IsRequired().HasMaxLength(128);
+
+            r.ConfigureByConvention();
+        });
+
     }
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
 

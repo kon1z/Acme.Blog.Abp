@@ -1,9 +1,11 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using Acme.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace Acme.EntityFrameworkCore;
+namespace Acme.Blog.EntityFrameworkCore;
 
 /* This class is needed for EF Core console commands
  * (like Add-Migration and Update-Database commands) */
@@ -25,13 +27,8 @@ public class BlogDbContextFactory : IDesignTimeDbContextFactory<BlogDbContext>
     {
         var builder = new ConfigurationBuilder()
             .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../Acme.Blog.DbMigrator/"))
-            .AddJsonFile("appsettings.json", false);
+            .AddJsonFile("appsettings.json", optional: false);
 
         return builder.Build();
-<<<<<<< Updated upstream
-    }
-}
-=======
     } 
 }
->>>>>>> Stashed changes
