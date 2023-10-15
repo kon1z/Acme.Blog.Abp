@@ -28,5 +28,10 @@ public class BlogDbContextFactory : IDesignTimeDbContextFactory<BlogDbContext>
             .AddJsonFile("appsettings.json", false);
 
         return builder.Build();
+<<<<<<< Updated upstream
     }
 }
+=======
+    } 
+}
+>>>>>>> Stashed changes
