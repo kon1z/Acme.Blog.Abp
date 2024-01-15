@@ -33,7 +33,9 @@ public class BlogDbContext :
 
 	public DbSet<Article> Articles { get; set; }
 
-	public DbSet<Lable> Lables { get; set; }
+	public DbSet<Lable> Labels { get; set; }
+
+	public DbSet<Category> Categories { get; set; }
 
 
 	protected override void OnModelCreating(ModelBuilder builder)
@@ -51,15 +53,6 @@ public class BlogDbContext :
 		builder.ConfigureFeatureManagement();
 		builder.ConfigureTenantManagement();
 
-		/* Configure your own tables/entities inside here */
-
-		//builder.Entity<YourEntity>(b =>
-		//{
-		//    b.ToTable(BlogConsts.DbTablePrefix + "YourEntities", BlogConsts.DbSchema);
-		//    b.ConfigureByConvention(); //auto configure for the base class props
-		//    //...
-		//});
-
 		builder.Entity<Article>(b =>
 		{
 			b.ToTable(BlogConsts.DbTablePrefix + "Article", BlogConsts.DbSchema);
@@ -72,13 +65,23 @@ public class BlogDbContext :
 
 		builder.Entity<Lable>(r =>
 		{
-			r.ToTable(BlogConsts.DbTablePrefix + "Lable", BlogConsts.DbSchema);
+			r.ToTable(BlogConsts.DbTablePrefix + "Label", BlogConsts.DbSchema);
 
 			r.Property(x => x.Name).IsRequired().HasMaxLength(128);
 
 			r.ConfigureByConvention();
 		});
-	}
+
+        builder.Entity<Category>(r =>
+        {
+            r.ToTable(BlogConsts.DbTablePrefix + "Category", BlogConsts.DbSchema);
+
+            r.Property(x => x.Name).IsRequired().HasMaxLength(128);
+
+            r.ConfigureByConvention();
+        });
+
+    }
 	/* Add DbSet properties for your Aggregate Roots / Entities here. */
 
 	#region Entities from the modules
