@@ -4,5 +4,5 @@ namespace Acme.Data;
 
 public interface IBlogDbSchemaMigrator
 {
-    Task MigrateAsync();
+	Task MigrateAsync();
 }

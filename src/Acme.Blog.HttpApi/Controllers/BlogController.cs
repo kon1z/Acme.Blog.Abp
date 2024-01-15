@@ -7,8 +7,8 @@ namespace Acme.Controllers;
  */
 public abstract class BlogController : AbpControllerBase
 {
-    protected BlogController()
-    {
-        LocalizationResource = typeof(BlogResource);
-    }
+	protected BlogController()
+	{
+		LocalizationResource = typeof(BlogResource);
+	}
 }

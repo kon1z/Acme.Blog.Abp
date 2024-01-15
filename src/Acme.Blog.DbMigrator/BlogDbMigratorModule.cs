@@ -7,15 +7,15 @@ using Volo.Abp.Modularity;
 namespace Acme.Blog.DbMigrator;
 
 [DependsOn(
-    typeof(AbpAutofacModule),
-    typeof(AbpCachingStackExchangeRedisModule),
-    typeof(BlogEntityFrameworkCoreModule),
-    typeof(BlogApplicationContractsModule)
+	typeof(AbpAutofacModule),
+	typeof(AbpCachingStackExchangeRedisModule),
+	typeof(BlogEntityFrameworkCoreModule),
+	typeof(BlogApplicationContractsModule)
 )]
 public class BlogDbMigratorModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        Configure<AbpDistributedCacheOptions>(options => { options.KeyPrefix = "Blog:"; });
-    }
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		Configure<AbpDistributedCacheOptions>(options => { options.KeyPrefix = "Blog:"; });
+	}
 }

@@ -9,30 +9,30 @@ namespace Acme.Blog.DbMigrator;
 
 internal class Program
 {
-    private static async Task Main(string[] args)
-    {
-        Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Information()
-            .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-            .MinimumLevel.Override("Volo.Abp", LogEventLevel.Warning)
+	private static async Task Main(string[] args)
+	{
+		Log.Logger = new LoggerConfiguration()
+			.MinimumLevel.Information()
+			.MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+			.MinimumLevel.Override("Volo.Abp", LogEventLevel.Warning)
 #if DEBUG
-            .MinimumLevel.Override("Acme.Blog", LogEventLevel.Debug)
+			.MinimumLevel.Override("Acme.Blog", LogEventLevel.Debug)
 #else
                 .MinimumLevel.Override("Acme.Blog", LogEventLevel.Information)
 #endif
-            .Enrich.FromLogContext()
-            .WriteTo.Async(c => c.File("Logs/logs.txt"))
-            .WriteTo.Async(c => c.Console())
-            .CreateLogger();
+			.Enrich.FromLogContext()
+			.WriteTo.Async(c => c.File("Logs/logs.txt"))
+			.WriteTo.Async(c => c.Console())
+			.CreateLogger();
 
-        await CreateHostBuilder(args).RunConsoleAsync();
-    }
+		await CreateHostBuilder(args).RunConsoleAsync();
+	}
 
-    public static IHostBuilder CreateHostBuilder(string[] args)
-    {
-        return Host.CreateDefaultBuilder(args)
-            .AddAppSettingsSecretsJson()
-            .ConfigureLogging((context, logging) => logging.ClearProviders())
-            .ConfigureServices((hostContext, services) => { services.AddHostedService<DbMigratorHostedService>(); });
-    }
+	public static IHostBuilder CreateHostBuilder(string[] args)
+	{
+		return Host.CreateDefaultBuilder(args)
+			.AddAppSettingsSecretsJson()
+			.ConfigureLogging((context, logging) => logging.ClearProviders())
+			.ConfigureServices((hostContext, services) => { services.AddHostedService<DbMigratorHostedService>(); });
+	}
 }

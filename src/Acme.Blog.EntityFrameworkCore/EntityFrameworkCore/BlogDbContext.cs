@@ -22,91 +22,90 @@ namespace Acme.EntityFrameworkCore;
 [ReplaceDbContext(typeof(ITenantManagementDbContext))]
 [ConnectionStringName("Default")]
 public class BlogDbContext :
-    AbpDbContext<BlogDbContext>,
-    IIdentityDbContext,
-    ITenantManagementDbContext
+	AbpDbContext<BlogDbContext>,
+	IIdentityDbContext,
+	ITenantManagementDbContext
 {
-    public BlogDbContext(DbContextOptions<BlogDbContext> options)
-        : base(options)
-    {
-    }
+	public BlogDbContext(DbContextOptions<BlogDbContext> options)
+		: base(options)
+	{
+	}
 
-    public DbSet<Article> Articles { get; set; }
+	public DbSet<Article> Articles { get; set; }
 
-    public DbSet<Lable> Lables { get; set; }
+	public DbSet<Lable> Lables { get; set; }
 
 
-    protected override void OnModelCreating(ModelBuilder builder)
-    {
-        base.OnModelCreating(builder);
+	protected override void OnModelCreating(ModelBuilder builder)
+	{
+		base.OnModelCreating(builder);
 
-        /* Include modules to your migration db context */
+		/* Include modules to your migration db context */
 
-        builder.ConfigurePermissionManagement();
-        builder.ConfigureSettingManagement();
-        builder.ConfigureBackgroundJobs();
-        builder.ConfigureAuditLogging();
-        builder.ConfigureIdentity();
-        builder.ConfigureOpenIddict();
-        builder.ConfigureFeatureManagement();
-        builder.ConfigureTenantManagement();
+		builder.ConfigurePermissionManagement();
+		builder.ConfigureSettingManagement();
+		builder.ConfigureBackgroundJobs();
+		builder.ConfigureAuditLogging();
+		builder.ConfigureIdentity();
+		builder.ConfigureOpenIddict();
+		builder.ConfigureFeatureManagement();
+		builder.ConfigureTenantManagement();
 
-        /* Configure your own tables/entities inside here */
+		/* Configure your own tables/entities inside here */
 
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    b.ToTable(BlogConsts.DbTablePrefix + "YourEntities", BlogConsts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
-        //});
+		//builder.Entity<YourEntity>(b =>
+		//{
+		//    b.ToTable(BlogConsts.DbTablePrefix + "YourEntities", BlogConsts.DbSchema);
+		//    b.ConfigureByConvention(); //auto configure for the base class props
+		//    //...
+		//});
 
-        builder.Entity<Article>(b =>
-        {
-            b.ToTable(BlogConsts.DbTablePrefix + "Article", BlogConsts.DbSchema);
+		builder.Entity<Article>(b =>
+		{
+			b.ToTable(BlogConsts.DbTablePrefix + "Article", BlogConsts.DbSchema);
 
-            b.Property(x => x.Title).IsRequired().HasMaxLength(128);
-            b.Property(x => x.Content).HasColumnType(DataType.Text.ToString());
+			b.Property(x => x.Title).IsRequired().HasMaxLength(128);
+			b.Property(x => x.Content).HasColumnType(DataType.Text.ToString());
 
-            b.ConfigureByConvention();
-        });
+			b.ConfigureByConvention();
+		});
 
-        builder.Entity<Lable>(r =>
-        {
-            r.ToTable(BlogConsts.DbTablePrefix + "Lable", BlogConsts.DbSchema);
+		builder.Entity<Lable>(r =>
+		{
+			r.ToTable(BlogConsts.DbTablePrefix + "Lable", BlogConsts.DbSchema);
 
-            r.Property(x => x.Name).IsRequired().HasMaxLength(128);
+			r.Property(x => x.Name).IsRequired().HasMaxLength(128);
 
-            r.ConfigureByConvention();
-        });
+			r.ConfigureByConvention();
+		});
+	}
+	/* Add DbSet properties for your Aggregate Roots / Entities here. */
 
-    }
-    /* Add DbSet properties for your Aggregate Roots / Entities here. */
+	#region Entities from the modules
 
-    #region Entities from the modules
+	/* Notice: We only implemented IIdentityDbContext and ITenantManagementDbContext
+	 * and replaced them for this DbContext. This allows you to perform JOIN
+	 * queries for the entities of these modules over the repositories easily. You
+	 * typically don't need that for other modules. But, if you need, you can
+	 * implement the DbContext interface of the needed module and use ReplaceDbContext
+	 * attribute just like IIdentityDbContext and ITenantManagementDbContext.
+	 *
+	 * More info: Replacing a DbContext of a module ensures that the related module
+	 * uses this DbContext on runtime. Otherwise, it will use its own DbContext class.
+	 */
 
-    /* Notice: We only implemented IIdentityDbContext and ITenantManagementDbContext
-     * and replaced them for this DbContext. This allows you to perform JOIN
-     * queries for the entities of these modules over the repositories easily. You
-     * typically don't need that for other modules. But, if you need, you can
-     * implement the DbContext interface of the needed module and use ReplaceDbContext
-     * attribute just like IIdentityDbContext and ITenantManagementDbContext.
-     *
-     * More info: Replacing a DbContext of a module ensures that the related module
-     * uses this DbContext on runtime. Otherwise, it will use its own DbContext class.
-     */
+	//Identity
+	public DbSet<IdentityUser> Users { get; set; }
+	public DbSet<IdentityRole> Roles { get; set; }
+	public DbSet<IdentityClaimType> ClaimTypes { get; set; }
+	public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
+	public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
+	public DbSet<IdentityLinkUser> LinkUsers { get; set; }
+	public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
 
-    //Identity
-    public DbSet<IdentityUser> Users { get; set; }
-    public DbSet<IdentityRole> Roles { get; set; }
-    public DbSet<IdentityClaimType> ClaimTypes { get; set; }
-    public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
-    public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
-    public DbSet<IdentityLinkUser> LinkUsers { get; set; }
-    public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
+	// Tenant Management
+	public DbSet<Tenant> Tenants { get; set; }
+	public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
-    // Tenant Management
-    public DbSet<Tenant> Tenants { get; set; }
-    public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
-
-    #endregion
+	#endregion
 }

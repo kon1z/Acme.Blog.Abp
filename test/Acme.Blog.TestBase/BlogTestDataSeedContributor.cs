@@ -6,10 +6,10 @@ namespace Acme;
 
 public class BlogTestDataSeedContributor : IDataSeedContributor, ITransientDependency
 {
-    public Task SeedAsync(DataSeedContext context)
-    {
-        /* Seed additional test data... */
+	public Task SeedAsync(DataSeedContext context)
+	{
+		/* Seed additional test data... */
 
-        return Task.CompletedTask;
-    }
+		return Task.CompletedTask;
+	}
 }

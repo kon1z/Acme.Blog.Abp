@@ -1,4 +1,7 @@
-﻿using Acme.EntityFrameworkCore;
+﻿using System;
+using System.IO;
+using System.Linq;
+using Acme.EntityFrameworkCore;
 using Acme.Localization;
 using Acme.MultiTenancy;
 using Localization.Resources.AbpUi;
@@ -12,9 +15,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StackExchange.Redis;
-using System;
-using System.IO;
-using System.Linq;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
@@ -31,174 +31,158 @@ using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Acme.Blog
+namespace Acme.Blog;
+
+[DependsOn(
+	typeof(AbpAutofacModule),
+	typeof(BlogEntityFrameworkCoreModule),
+	typeof(AbpAutofacModule),
+	typeof(AbpCachingStackExchangeRedisModule),
+	typeof(AbpDistributedLockingModule),
+	typeof(AbpAccountWebOpenIddictModule),
+	typeof(AbpAccountApplicationModule),
+	typeof(AbpAccountHttpApiModule),
+	typeof(AbpAspNetCoreSerilogModule)
+)]
+public class BlogAuthServerBlazorModule : AbpModule
 {
-	[DependsOn(
-		typeof(AbpAutofacModule),
-		typeof(BlogEntityFrameworkCoreModule),
-		typeof(AbpAutofacModule),
-		typeof(AbpCachingStackExchangeRedisModule),
-		typeof(AbpDistributedLockingModule),
-		typeof(AbpAccountWebOpenIddictModule),
-		typeof(AbpAccountApplicationModule),
-		typeof(AbpAccountHttpApiModule),
-		typeof(AbpAspNetCoreSerilogModule)
-		)]
-	public class BlogAuthServerBlazorModule : AbpModule
+	public override void PreConfigureServices(ServiceConfigurationContext context)
 	{
-		public override void PreConfigureServices(ServiceConfigurationContext context)
+		PreConfigure<OpenIddictBuilder>(builder =>
 		{
-			PreConfigure<OpenIddictBuilder>(builder =>
+			builder.AddValidation(options =>
 			{
-				builder.AddValidation(options =>
-				{
-					options.AddAudiences("Acme.Blog.AuthServer");
-					options.UseLocalServer();
-					options.UseAspNetCore();
-				});
+				options.AddAudiences("Acme.Blog.AuthServer");
+				options.UseLocalServer();
+				options.UseAspNetCore();
 			});
-		}
+		});
+	}
 
-		public override void ConfigureServices(ServiceConfigurationContext context)
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		var hostEnvironment = context.Services.GetHostingEnvironment();
+		var configuration = context.Services.GetConfiguration();
+
+		ConfigureLocation();
+		ConfigureAuditing();
+		ConfigureVirtualFileSystem(hostEnvironment);
+		ConfigureBackgroundJob();
+		ConfigureCors(context, configuration);
+		ConfigureDistributedCacheAndDistributedLock(context, hostEnvironment, configuration);
+		ConfigureTheme(context);
+	}
+
+	private void ConfigureTheme(ServiceConfigurationContext context)
+	{
+		Configure<AbpThemingOptions>(options => { });
+	}
+
+	private void ConfigureLocation()
+	{
+		Configure<AbpLocalizationOptions>(options =>
 		{
-			var hostEnvironment = context.Services.GetHostingEnvironment();
-			var configuration = context.Services.GetConfiguration();
+			options.Resources
+				.Get<BlogResource>()
+				.AddBaseTypes(
+					typeof(AbpUiResource)
+				);
+		});
+	}
 
-			ConfigureLocation();
-			ConfigureAuditing();
-			ConfigureVirtualFileSystem(hostEnvironment);
-			ConfigureBackgroundJob();
-			ConfigureCors(context, configuration);
-			ConfigureDistributedCacheAndDistributedLock(context, hostEnvironment, configuration);
-			ConfigureTheme(context);
-		}
-
-		private void ConfigureTheme(ServiceConfigurationContext context)
+	private void ConfigureAuditing()
+	{
+		Configure<AbpAuditingOptions>(options =>
 		{
-			Configure<AbpThemingOptions>(options =>
+			//options.IsEnabledForGetRequests = true;
+			options.ApplicationName = "AuthServer";
+		});
+	}
+
+	private void ConfigureVirtualFileSystem(IWebHostEnvironment hostEnvironment)
+	{
+		if (hostEnvironment.IsDevelopment())
+			Configure<AbpVirtualFileSystemOptions>(options =>
 			{
+				options.FileSets.ReplaceEmbeddedByPhysical<BlogDomainSharedModule>(
+					Path.Combine(hostEnvironment.ContentRootPath,
+						$"..{Path.DirectorySeparatorChar}Acme.Blog.Domain.Shared"));
+				options.FileSets.ReplaceEmbeddedByPhysical<BlogDomainModule>(
+					Path.Combine(hostEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.Blog.Domain"));
 			});
-		}
+	}
 
-		private void ConfigureLocation()
+	private void ConfigureBackgroundJob()
+	{
+		Configure<AbpBackgroundJobOptions>(options => { options.IsJobExecutionEnabled = false; });
+	}
+
+	private void ConfigureCors(ServiceConfigurationContext context, IConfiguration configuration)
+	{
+		context.Services.AddCors(options =>
 		{
-			Configure<AbpLocalizationOptions>(options =>
+			options.AddDefaultPolicy(builder =>
 			{
-				options.Resources
-					.Get<BlogResource>()
-					.AddBaseTypes(
-						typeof(AbpUiResource)
-					);
+				builder
+					.WithOrigins(
+						configuration["App:CorsOrigins"]?
+							.Split(",", StringSplitOptions.RemoveEmptyEntries)
+							.Select(o => o.RemovePostFix("/"))
+							.ToArray() ?? Array.Empty<string>()
+					)
+					.WithAbpExposedHeaders()
+					.SetIsOriginAllowedToAllowWildcardSubdomains()
+					.AllowAnyHeader()
+					.AllowAnyMethod()
+					.AllowCredentials();
 			});
-		}
+		});
+	}
 
-		private void ConfigureAuditing()
+	private void ConfigureDistributedCacheAndDistributedLock(ServiceConfigurationContext context,
+		IWebHostEnvironment hostEnvironment, IConfiguration configuration)
+	{
+		Configure<AbpDistributedCacheOptions>(options => { options.KeyPrefix = "AuthServer:"; });
+
+		var dataProtectionBuilder = context.Services.AddDataProtection().SetApplicationName("AuthServer");
+		if (!hostEnvironment.IsDevelopment())
 		{
-			Configure<AbpAuditingOptions>(options =>
-			{
-				//options.IsEnabledForGetRequests = true;
-				options.ApplicationName = "AuthServer";
-			});
+			var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]!);
+			dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "AuthServer-Protection-Keys");
 		}
 
-		private void ConfigureVirtualFileSystem(IWebHostEnvironment hostEnvironment)
+		context.Services.AddSingleton<IDistributedLockProvider>(sp =>
 		{
-			if (hostEnvironment.IsDevelopment())
-			{
-				Configure<AbpVirtualFileSystemOptions>(options =>
-				{
-					options.FileSets.ReplaceEmbeddedByPhysical<BlogDomainSharedModule>(Path.Combine(hostEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.Blog.Domain.Shared"));
-					options.FileSets.ReplaceEmbeddedByPhysical<BlogDomainModule>(Path.Combine(hostEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.Blog.Domain"));
-				});
-			}
-		}
+			var connection = ConnectionMultiplexer
+				.Connect(configuration["Redis:Configuration"]!);
+			return new RedisDistributedSynchronizationProvider(connection.GetDatabase());
+		});
+	}
 
-		private void ConfigureBackgroundJob()
-		{
-			Configure<AbpBackgroundJobOptions>(options =>
-			{
-				options.IsJobExecutionEnabled = false;
-			});
-		}
+	public override void OnApplicationInitialization(ApplicationInitializationContext context)
+	{
+		var app = context.GetApplicationBuilder();
+		var env = context.GetEnvironment();
 
-		private void ConfigureCors(ServiceConfigurationContext context, IConfiguration configuration)
-		{
-			context.Services.AddCors(options =>
-			{
-				options.AddDefaultPolicy(builder =>
-				{
-					builder
-						.WithOrigins(
-							configuration["App:CorsOrigins"]?
-								.Split(",", StringSplitOptions.RemoveEmptyEntries)
-								.Select(o => o.RemovePostFix("/"))
-								.ToArray() ?? Array.Empty<string>()
-						)
-						.WithAbpExposedHeaders()
-						.SetIsOriginAllowedToAllowWildcardSubdomains()
-						.AllowAnyHeader()
-						.AllowAnyMethod()
-						.AllowCredentials();
-				});
-			});
-		}
+		if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
-		private void ConfigureDistributedCacheAndDistributedLock(ServiceConfigurationContext context, IWebHostEnvironment hostEnvironment, IConfiguration configuration)
-		{
-			Configure<AbpDistributedCacheOptions>(options =>
-			{
-				options.KeyPrefix = "AuthServer:";
-			});
+		app.UseAbpRequestLocalization();
 
-			var dataProtectionBuilder = context.Services.AddDataProtection().SetApplicationName("AuthServer");
-			if (!hostEnvironment.IsDevelopment())
-			{
-				var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]!);
-				dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "AuthServer-Protection-Keys");
-			}
+		if (!env.IsDevelopment()) app.UseErrorPage();
 
-			context.Services.AddSingleton<IDistributedLockProvider>(sp =>
-			{
-				var connection = ConnectionMultiplexer
-					.Connect(configuration["Redis:Configuration"]!);
-				return new RedisDistributedSynchronizationProvider(connection.GetDatabase());
-			});
-		}
+		app.UseCorrelationId();
+		app.UseStaticFiles();
+		app.UseRouting();
+		app.UseCors();
+		app.UseAuthentication();
+		app.UseAbpOpenIddictValidation();
 
-		public override void OnApplicationInitialization(ApplicationInitializationContext context)
-		{
-			var app = context.GetApplicationBuilder();
-			var env = context.GetEnvironment();
+		if (MultiTenancyConsts.IsEnabled) app.UseMultiTenancy();
 
-			if (env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-			}
-
-			app.UseAbpRequestLocalization();
-
-			if (!env.IsDevelopment())
-			{
-				app.UseErrorPage();
-			}
-
-			app.UseCorrelationId();
-			app.UseStaticFiles();
-			app.UseRouting();
-			app.UseCors();
-			app.UseAuthentication();
-			app.UseAbpOpenIddictValidation();
-
-			if (MultiTenancyConsts.IsEnabled)
-			{
-				app.UseMultiTenancy();
-			}
-
-			app.UseUnitOfWork();
-			app.UseAuthorization();
-			app.UseAuditing();
-			app.UseAbpSerilogEnrichers();
-			app.UseConfiguredEndpoints();
-		}
+		app.UseUnitOfWork();
+		app.UseAuthorization();
+		app.UseAuditing();
+		app.UseAbpSerilogEnrichers();
+		app.UseConfiguredEndpoints();
 	}
 }

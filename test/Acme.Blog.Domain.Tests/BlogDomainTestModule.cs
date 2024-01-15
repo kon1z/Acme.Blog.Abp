@@ -4,7 +4,7 @@ using Volo.Abp.Modularity;
 namespace Acme;
 
 [DependsOn(
-    typeof(BlogEntityFrameworkCoreTestModule)
+	typeof(BlogEntityFrameworkCoreTestModule)
 )]
 public class BlogDomainTestModule : AbpModule
 {

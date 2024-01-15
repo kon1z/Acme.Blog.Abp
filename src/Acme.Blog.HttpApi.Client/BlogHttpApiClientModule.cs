@@ -11,24 +11,24 @@ using Volo.Abp.VirtualFileSystem;
 namespace Acme;
 
 [DependsOn(
-    typeof(BlogApplicationContractsModule),
-    typeof(AbpAccountHttpApiClientModule),
-    typeof(AbpIdentityHttpApiClientModule),
-    typeof(AbpPermissionManagementHttpApiClientModule),
-    typeof(AbpTenantManagementHttpApiClientModule),
-    typeof(AbpFeatureManagementHttpApiClientModule),
-    typeof(AbpSettingManagementHttpApiClientModule)
+	typeof(BlogApplicationContractsModule),
+	typeof(AbpAccountHttpApiClientModule),
+	typeof(AbpIdentityHttpApiClientModule),
+	typeof(AbpPermissionManagementHttpApiClientModule),
+	typeof(AbpTenantManagementHttpApiClientModule),
+	typeof(AbpFeatureManagementHttpApiClientModule),
+	typeof(AbpSettingManagementHttpApiClientModule)
 )]
 public class BlogHttpApiClientModule : AbpModule
 {
-    public const string RemoteServiceName = "Default";
+	public const string RemoteServiceName = "Default";
 
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        context.Services.AddHttpClientProxies(
-            typeof(BlogApplicationContractsModule).Assembly
-        );
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		context.Services.AddHttpClientProxies(
+			typeof(BlogApplicationContractsModule).Assembly
+		);
 
-        Configure<AbpVirtualFileSystemOptions>(options => { options.FileSets.AddEmbedded<BlogHttpApiClientModule>(); });
-    }
+		Configure<AbpVirtualFileSystemOptions>(options => { options.FileSets.AddEmbedded<BlogHttpApiClientModule>(); });
+	}
 }

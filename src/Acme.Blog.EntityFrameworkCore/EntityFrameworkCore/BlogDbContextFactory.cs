@@ -1,34 +1,32 @@
-﻿using System;
-using System.IO;
-using Acme.EntityFrameworkCore;
+﻿using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace Acme.Blog.EntityFrameworkCore;
+namespace Acme.EntityFrameworkCore;
 
 /* This class is needed for EF Core console commands
  * (like Add-Migration and Update-Database commands) */
 public class BlogDbContextFactory : IDesignTimeDbContextFactory<BlogDbContext>
 {
-    public BlogDbContext CreateDbContext(string[] args)
-    {
-        BlogEfCoreEntityExtensionMappings.Configure();
+	public BlogDbContext CreateDbContext(string[] args)
+	{
+		BlogEfCoreEntityExtensionMappings.Configure();
 
-        var configuration = BuildConfiguration();
+		var configuration = BuildConfiguration();
 
-        var builder = new DbContextOptionsBuilder<BlogDbContext>()
-            .UseSqlServer(configuration.GetConnectionString("Default"));
+		var builder = new DbContextOptionsBuilder<BlogDbContext>()
+			.UseSqlServer(configuration.GetConnectionString("Default"));
 
-        return new BlogDbContext(builder.Options);
-    }
+		return new BlogDbContext(builder.Options);
+	}
 
-    private static IConfigurationRoot BuildConfiguration()
-    {
-        var builder = new ConfigurationBuilder()
-            .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../Acme.Blog.DbMigrator/"))
-            .AddJsonFile("appsettings.json", optional: false);
+	private static IConfigurationRoot BuildConfiguration()
+	{
+		var builder = new ConfigurationBuilder()
+			.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../Acme.Blog.DbMigrator/"))
+			.AddJsonFile("appsettings.json", false);
 
-        return builder.Build();
-    } 
+		return builder.Build();
+	}
 }

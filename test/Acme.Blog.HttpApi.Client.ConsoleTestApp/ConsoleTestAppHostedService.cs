@@ -9,32 +9,32 @@ namespace Acme.Blog.HttpApi.Client.ConsoleTestApp;
 
 public class ConsoleTestAppHostedService : IHostedService
 {
-    private readonly IConfiguration _configuration;
+	private readonly IConfiguration _configuration;
 
-    public ConsoleTestAppHostedService(IConfiguration configuration)
-    {
-        _configuration = configuration;
-    }
+	public ConsoleTestAppHostedService(IConfiguration configuration)
+	{
+		_configuration = configuration;
+	}
 
-    public async Task StartAsync(CancellationToken cancellationToken)
-    {
-        using (var application = await AbpApplicationFactory.CreateAsync<BlogConsoleApiClientModule>(options =>
-               {
-                   options.Services.ReplaceConfiguration(_configuration);
-                   options.UseAutofac();
-               }))
-        {
-            await application.InitializeAsync();
+	public async Task StartAsync(CancellationToken cancellationToken)
+	{
+		using (var application = await AbpApplicationFactory.CreateAsync<BlogConsoleApiClientModule>(options =>
+		       {
+			       options.Services.ReplaceConfiguration(_configuration);
+			       options.UseAutofac();
+		       }))
+		{
+			await application.InitializeAsync();
 
-            var demo = application.ServiceProvider.GetRequiredService<ClientDemoService>();
-            await demo.RunAsync();
+			var demo = application.ServiceProvider.GetRequiredService<ClientDemoService>();
+			await demo.RunAsync();
 
-            await application.ShutdownAsync();
-        }
-    }
+			await application.ShutdownAsync();
+		}
+	}
 
-    public Task StopAsync(CancellationToken cancellationToken)
-    {
-        return Task.CompletedTask;
-    }
+	public Task StopAsync(CancellationToken cancellationToken)
+	{
+		return Task.CompletedTask;
+	}
 }

@@ -8,7 +8,7 @@ namespace Acme.EntityFrameworkCore.Repositories;
 
 public class ArticleRepository : EfCoreRepository<BlogDbContext, Article, Guid>, IArticleRepository
 {
-    public ArticleRepository(IDbContextProvider<BlogDbContext> dbContextProvider) : base(dbContextProvider)
-    {
-    }
+	public ArticleRepository(IDbContextProvider<BlogDbContext> dbContextProvider) : base(dbContextProvider)
+	{
+	}
 }

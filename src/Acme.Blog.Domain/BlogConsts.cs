@@ -2,7 +2,7 @@
 
 public static class BlogConsts
 {
-    public const string DbTablePrefix = "App";
+	public const string DbTablePrefix = "App";
 
-    public const string DbSchema = null;
+	public const string DbSchema = null;
 }

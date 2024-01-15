@@ -1,10 +1,10 @@
+using System;
 using Acme.Blog;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
-using System;
 
 Log.Logger = new LoggerConfiguration()
 #if DEBUG
@@ -34,10 +34,7 @@ try
 }
 catch (Exception ex)
 {
-	if (ex is HostAbortedException)
-	{
-		throw;
-	}
+	if (ex is HostAbortedException) throw;
 
 	Log.Fatal(ex, "Acme.Blog.AuthServer.Blazor terminated unexpectedly!");
 	return 1;

@@ -16,28 +16,28 @@ namespace Acme.EntityFrameworkCore.Samples;
  */
 public class SampleRepositoryTests : BlogEntityFrameworkCoreTestBase
 {
-    private readonly IRepository<IdentityUser, Guid> _appUserRepository;
+	private readonly IRepository<IdentityUser, Guid> _appUserRepository;
 
-    public SampleRepositoryTests()
-    {
-        _appUserRepository = GetRequiredService<IRepository<IdentityUser, Guid>>();
-    }
+	public SampleRepositoryTests()
+	{
+		_appUserRepository = GetRequiredService<IRepository<IdentityUser, Guid>>();
+	}
 
-    [Fact]
-    public async Task Should_Query_AppUser()
-    {
-        /* Need to manually start Unit Of Work because
-         * FirstOrDefaultAsync should be executed while db connection / context is available.
-         */
-        await WithUnitOfWorkAsync(async () =>
-        {
-            //Act
-            var adminUser = await (await _appUserRepository.GetQueryableAsync())
-                .Where(u => u.UserName == "admin")
-                .FirstOrDefaultAsync();
+	[Fact]
+	public async Task Should_Query_AppUser()
+	{
+		/* Need to manually start Unit Of Work because
+		 * FirstOrDefaultAsync should be executed while db connection / context is available.
+		 */
+		await WithUnitOfWorkAsync(async () =>
+		{
+			//Act
+			var adminUser = await (await _appUserRepository.GetQueryableAsync())
+				.Where(u => u.UserName == "admin")
+				.FirstOrDefaultAsync();
 
-            //Assert
-            adminUser.ShouldNotBeNull();
-        });
-    }
+			//Assert
+			adminUser.ShouldNotBeNull();
+		});
+	}
 }

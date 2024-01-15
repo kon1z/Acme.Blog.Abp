@@ -14,38 +14,38 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 namespace Acme.EntityFrameworkCore;
 
 [DependsOn(
-    typeof(BlogDomainModule),
-    typeof(AbpIdentityEntityFrameworkCoreModule),
-    typeof(AbpOpenIddictEntityFrameworkCoreModule),
-    typeof(AbpPermissionManagementEntityFrameworkCoreModule),
-    typeof(AbpSettingManagementEntityFrameworkCoreModule),
-    typeof(AbpEntityFrameworkCoreSqlServerModule),
-    typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
-    typeof(AbpAuditLoggingEntityFrameworkCoreModule),
-    typeof(AbpTenantManagementEntityFrameworkCoreModule),
-    typeof(AbpFeatureManagementEntityFrameworkCoreModule)
+	typeof(BlogDomainModule),
+	typeof(AbpIdentityEntityFrameworkCoreModule),
+	typeof(AbpOpenIddictEntityFrameworkCoreModule),
+	typeof(AbpPermissionManagementEntityFrameworkCoreModule),
+	typeof(AbpSettingManagementEntityFrameworkCoreModule),
+	typeof(AbpEntityFrameworkCoreSqlServerModule),
+	typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
+	typeof(AbpAuditLoggingEntityFrameworkCoreModule),
+	typeof(AbpTenantManagementEntityFrameworkCoreModule),
+	typeof(AbpFeatureManagementEntityFrameworkCoreModule)
 )]
 public class BlogEntityFrameworkCoreModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
-    {
-        BlogEfCoreEntityExtensionMappings.Configure();
-    }
+	public override void PreConfigureServices(ServiceConfigurationContext context)
+	{
+		BlogEfCoreEntityExtensionMappings.Configure();
+	}
 
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        context.Services.AddAbpDbContext<BlogDbContext>(options =>
-        {
-            /* Remove "includeAllEntities: true" to create
-             * default repositories only for aggregate roots */
-            options.AddDefaultRepositories(true);
-        });
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		context.Services.AddAbpDbContext<BlogDbContext>(options =>
+		{
+			/* Remove "includeAllEntities: true" to create
+			 * default repositories only for aggregate roots */
+			options.AddDefaultRepositories(true);
+		});
 
-        Configure<AbpDbContextOptions>(options =>
-        {
-            /* The main point to change your DBMS.
-             * See also BlogMigrationsDbContextFactory for EF Core tooling. */
-            options.UseSqlServer();
-        });
-    }
+		Configure<AbpDbContextOptions>(options =>
+		{
+			/* The main point to change your DBMS.
+			 * See also BlogMigrationsDbContextFactory for EF Core tooling. */
+			options.UseSqlServer();
+		});
+	}
 }

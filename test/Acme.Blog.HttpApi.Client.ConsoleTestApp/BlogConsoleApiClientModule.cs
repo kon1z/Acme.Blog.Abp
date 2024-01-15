@@ -9,22 +9,22 @@ using Volo.Abp.Modularity;
 namespace Acme.Blog.HttpApi.Client.ConsoleTestApp;
 
 [DependsOn(
-    typeof(AbpAutofacModule),
-    typeof(BlogHttpApiClientModule),
-    typeof(AbpHttpClientIdentityModelModule)
+	typeof(AbpAutofacModule),
+	typeof(BlogHttpApiClientModule),
+	typeof(AbpHttpClientIdentityModelModule)
 )]
 public class BlogConsoleApiClientModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
-    {
-        PreConfigure<AbpHttpClientBuilderOptions>(options =>
-        {
-            options.ProxyClientBuildActions.Add((remoteServiceName, clientBuilder) =>
-            {
-                clientBuilder.AddTransientHttpErrorPolicy(
-                    policyBuilder => policyBuilder.WaitAndRetryAsync(3, i => TimeSpan.FromSeconds(Math.Pow(2, i)))
-                );
-            });
-        });
-    }
+	public override void PreConfigureServices(ServiceConfigurationContext context)
+	{
+		PreConfigure<AbpHttpClientBuilderOptions>(options =>
+		{
+			options.ProxyClientBuildActions.Add((remoteServiceName, clientBuilder) =>
+			{
+				clientBuilder.AddTransientHttpErrorPolicy(
+					policyBuilder => policyBuilder.WaitAndRetryAsync(3, i => TimeSpan.FromSeconds(Math.Pow(2, i)))
+				);
+			});
+		});
+	}
 }

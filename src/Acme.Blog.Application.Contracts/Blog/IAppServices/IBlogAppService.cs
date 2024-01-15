@@ -8,6 +8,6 @@ namespace Acme.Blog.IAppServices;
 
 public interface IBlogAppService : IApplicationService
 {
-    Task<PagedResultDto<ArticleDto>> GetListAsync(GetArticleDto input);
-    Task<ArticleDetailDto> GetAsync(Guid id);
+	Task<PagedResultDto<ArticleDto>> GetListAsync(GetArticleDto input);
+	Task<ArticleDetailDto> GetAsync(Guid id);
 }

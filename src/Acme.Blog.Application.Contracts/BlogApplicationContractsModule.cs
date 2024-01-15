@@ -10,19 +10,19 @@ using Volo.Abp.TenantManagement;
 namespace Acme;
 
 [DependsOn(
-    typeof(BlogDomainSharedModule),
-    typeof(AbpAccountApplicationContractsModule),
-    typeof(AbpFeatureManagementApplicationContractsModule),
-    typeof(AbpIdentityApplicationContractsModule),
-    typeof(AbpPermissionManagementApplicationContractsModule),
-    typeof(AbpSettingManagementApplicationContractsModule),
-    typeof(AbpTenantManagementApplicationContractsModule),
-    typeof(AbpObjectExtendingModule)
+	typeof(BlogDomainSharedModule),
+	typeof(AbpAccountApplicationContractsModule),
+	typeof(AbpFeatureManagementApplicationContractsModule),
+	typeof(AbpIdentityApplicationContractsModule),
+	typeof(AbpPermissionManagementApplicationContractsModule),
+	typeof(AbpSettingManagementApplicationContractsModule),
+	typeof(AbpTenantManagementApplicationContractsModule),
+	typeof(AbpObjectExtendingModule)
 )]
 public class BlogApplicationContractsModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
-    {
-        BlogDtoExtensions.Configure();
-    }
+	public override void PreConfigureServices(ServiceConfigurationContext context)
+	{
+		BlogDtoExtensions.Configure();
+	}
 }

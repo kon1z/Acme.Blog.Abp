@@ -7,8 +7,8 @@ namespace Acme;
  */
 public abstract class AcmeBlogAppService : ApplicationService
 {
-    protected AcmeBlogAppService()
-    {
-        LocalizationResource = typeof(BlogResource);
-    }
+	protected AcmeBlogAppService()
+	{
+		LocalizationResource = typeof(BlogResource);
+	}
 }

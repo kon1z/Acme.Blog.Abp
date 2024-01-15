@@ -5,7 +5,7 @@ namespace Acme.Blog.Dtos;
 
 public class ArticleDto : EntityDto<Guid>
 {
-    public string Title { get; set; } = string.Empty;
-    public string Description { get; set; } = string.Empty;
-    public DateTime CreateTime { get; set; }
+	public string Title { get; set; } = string.Empty;
+	public string Description { get; set; } = string.Empty;
+	public DateTime CreateTime { get; set; }
 }

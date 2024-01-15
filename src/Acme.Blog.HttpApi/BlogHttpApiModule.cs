@@ -12,30 +12,30 @@ using Volo.Abp.TenantManagement;
 namespace Acme;
 
 [DependsOn(
-    typeof(BlogApplicationContractsModule),
-    typeof(AbpAccountHttpApiModule),
-    typeof(AbpIdentityHttpApiModule),
-    typeof(AbpPermissionManagementHttpApiModule),
-    typeof(AbpTenantManagementHttpApiModule),
-    typeof(AbpFeatureManagementHttpApiModule),
-    typeof(AbpSettingManagementHttpApiModule)
+	typeof(BlogApplicationContractsModule),
+	typeof(AbpAccountHttpApiModule),
+	typeof(AbpIdentityHttpApiModule),
+	typeof(AbpPermissionManagementHttpApiModule),
+	typeof(AbpTenantManagementHttpApiModule),
+	typeof(AbpFeatureManagementHttpApiModule),
+	typeof(AbpSettingManagementHttpApiModule)
 )]
 public class BlogHttpApiModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        ConfigureLocalization();
-    }
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		ConfigureLocalization();
+	}
 
-    private void ConfigureLocalization()
-    {
-        Configure<AbpLocalizationOptions>(options =>
-        {
-            options.Resources
-                .Get<BlogResource>()
-                .AddBaseTypes(
-                    typeof(AbpUiResource)
-                );
-        });
-    }
+	private void ConfigureLocalization()
+	{
+		Configure<AbpLocalizationOptions>(options =>
+		{
+			options.Resources
+				.Get<BlogResource>()
+				.AddBaseTypes(
+					typeof(AbpUiResource)
+				);
+		});
+	}
 }

@@ -16,40 +16,40 @@ using Volo.Abp.VirtualFileSystem;
 namespace Acme;
 
 [DependsOn(
-    typeof(AbpAuditLoggingDomainSharedModule),
-    typeof(AbpBackgroundJobsDomainSharedModule),
-    typeof(AbpFeatureManagementDomainSharedModule),
-    typeof(AbpIdentityDomainSharedModule),
-    typeof(AbpOpenIddictDomainSharedModule),
-    typeof(AbpPermissionManagementDomainSharedModule),
-    typeof(AbpSettingManagementDomainSharedModule),
-    typeof(AbpTenantManagementDomainSharedModule)
+	typeof(AbpAuditLoggingDomainSharedModule),
+	typeof(AbpBackgroundJobsDomainSharedModule),
+	typeof(AbpFeatureManagementDomainSharedModule),
+	typeof(AbpIdentityDomainSharedModule),
+	typeof(AbpOpenIddictDomainSharedModule),
+	typeof(AbpPermissionManagementDomainSharedModule),
+	typeof(AbpSettingManagementDomainSharedModule),
+	typeof(AbpTenantManagementDomainSharedModule)
 )]
 public class BlogDomainSharedModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
-    {
-        BlogGlobalFeatureConfigurator.Configure();
-        BlogModuleExtensionConfigurator.Configure();
-    }
+	public override void PreConfigureServices(ServiceConfigurationContext context)
+	{
+		BlogGlobalFeatureConfigurator.Configure();
+		BlogModuleExtensionConfigurator.Configure();
+	}
 
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        Configure<AbpVirtualFileSystemOptions>(options => { options.FileSets.AddEmbedded<BlogDomainSharedModule>(); });
+	public override void ConfigureServices(ServiceConfigurationContext context)
+	{
+		Configure<AbpVirtualFileSystemOptions>(options => { options.FileSets.AddEmbedded<BlogDomainSharedModule>(); });
 
-        Configure<AbpLocalizationOptions>(options =>
-        {
-            options.Resources
-                .Add<BlogResource>("en")
-                .AddBaseTypes(typeof(AbpValidationResource))
-                .AddVirtualJson("/Localization/Blog");
+		Configure<AbpLocalizationOptions>(options =>
+		{
+			options.Resources
+				.Add<BlogResource>("en")
+				.AddBaseTypes(typeof(AbpValidationResource))
+				.AddVirtualJson("/Localization/Blog");
 
-            options.DefaultResourceType = typeof(BlogResource);
-        });
+			options.DefaultResourceType = typeof(BlogResource);
+		});
 
-        Configure<AbpExceptionLocalizationOptions>(options =>
-        {
-            options.MapCodeNamespace("Blog", typeof(BlogResource));
-        });
-    }
+		Configure<AbpExceptionLocalizationOptions>(options =>
+		{
+			options.MapCodeNamespace("Blog", typeof(BlogResource));
+		});
+	}
 }

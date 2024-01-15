@@ -8,8 +8,8 @@ namespace Acme.Data;
  */
 public class NullBlogDbSchemaMigrator : IBlogDbSchemaMigrator, ITransientDependency
 {
-    public Task MigrateAsync()
-    {
-        return Task.CompletedTask;
-    }
+	public Task MigrateAsync()
+	{
+		return Task.CompletedTask;
+	}
 }
