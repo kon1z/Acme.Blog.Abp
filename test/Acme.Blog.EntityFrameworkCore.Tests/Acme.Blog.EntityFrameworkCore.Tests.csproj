@@ -11,7 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Acme.Blog.EntityFrameworkCore\Acme.Blog.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Acme.Blog.Application.Tests\Acme.Blog.Application.Tests.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.0.1" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.0.2" />
   </ItemGroup>
 
   <ItemGroup>
