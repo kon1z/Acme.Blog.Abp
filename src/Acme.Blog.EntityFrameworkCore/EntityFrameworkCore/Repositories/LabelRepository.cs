@@ -5,9 +5,5 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace Acme.Blog.EntityFrameworkCore.Repositories;
 
-public class LabelRepository : BlogRepositoryBase<Label, Guid>, ILabelRepository
-{
-	public LabelRepository(IDbContextProvider<BlogDbContext> dbContextProvider) : base(dbContextProvider)
-	{
-	}
-}
+public class LabelRepository(IDbContextProvider<BlogDbContext> dbContextProvider)
+	: BlogRepositoryBase<Label, Guid>(dbContextProvider), ILabelRepository;

@@ -7,17 +7,9 @@ using Volo.Abp.DependencyInjection;
 
 namespace Acme.Blog.EntityFrameworkCore;
 
-public class EntityFrameworkCoreBlogDbSchemaMigrator
+public class EntityFrameworkCoreBlogDbSchemaMigrator(IServiceProvider serviceProvider)
 	: IBlogDbSchemaMigrator, ITransientDependency
 {
-	private readonly IServiceProvider _serviceProvider;
-
-	public EntityFrameworkCoreBlogDbSchemaMigrator(
-		IServiceProvider serviceProvider)
-	{
-		_serviceProvider = serviceProvider;
-	}
-
 	public async Task MigrateAsync()
 	{
 		/* We intentionally resolve the BlogDbContext
@@ -26,7 +18,7 @@ public class EntityFrameworkCoreBlogDbSchemaMigrator
 		 * current scope.
 		 */
 
-		await _serviceProvider
+		await serviceProvider
 			.GetRequiredService<BlogDbContext>()
 			.Database
 			.MigrateAsync();

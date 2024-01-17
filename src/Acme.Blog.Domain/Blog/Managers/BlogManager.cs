@@ -3,12 +3,7 @@ using Volo.Abp.Domain.Services;
 
 namespace Acme.Blog.Blog.Managers;
 
-public class BlogManager : DomainService
+public class BlogManager(IArticleRepository articleRepository) : DomainService
 {
-	private readonly IArticleRepository _articleRepository;
-
-	public BlogManager(IArticleRepository articleRepository)
-	{
-		_articleRepository = articleRepository;
-	}
+	private readonly IArticleRepository _articleRepository = articleRepository;
 }

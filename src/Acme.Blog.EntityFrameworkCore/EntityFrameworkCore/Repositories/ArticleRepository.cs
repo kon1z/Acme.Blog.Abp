@@ -5,9 +5,5 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace Acme.Blog.EntityFrameworkCore.Repositories;
 
-public class ArticleRepository : BlogRepositoryBase<Article, Guid>, IArticleRepository
-{
-	public ArticleRepository(IDbContextProvider<BlogDbContext> dbContextProvider) : base(dbContextProvider)
-	{
-	}
-}
+public class ArticleRepository(IDbContextProvider<BlogDbContext> dbContextProvider)
+	: BlogRepositoryBase<Article, Guid>(dbContextProvider), IArticleRepository;

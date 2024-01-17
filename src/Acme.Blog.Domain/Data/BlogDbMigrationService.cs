@@ -15,29 +15,14 @@ using Volo.Abp.TenantManagement;
 
 namespace Acme.Blog.Data;
 
-public class BlogDbMigrationService : ITransientDependency
+public class BlogDbMigrationService(
+	IDataSeeder dataSeeder,
+	IEnumerable<IBlogDbSchemaMigrator> dbSchemaMigrators,
+	ITenantRepository tenantRepository,
+	ICurrentTenant currentTenant)
+	: ITransientDependency
 {
-	private readonly ICurrentTenant _currentTenant;
-
-	private readonly IDataSeeder _dataSeeder;
-	private readonly IEnumerable<IBlogDbSchemaMigrator> _dbSchemaMigrators;
-	private readonly ITenantRepository _tenantRepository;
-
-	public BlogDbMigrationService(
-		IDataSeeder dataSeeder,
-		IEnumerable<IBlogDbSchemaMigrator> dbSchemaMigrators,
-		ITenantRepository tenantRepository,
-		ICurrentTenant currentTenant)
-	{
-		_dataSeeder = dataSeeder;
-		_dbSchemaMigrators = dbSchemaMigrators;
-		_tenantRepository = tenantRepository;
-		_currentTenant = currentTenant;
-
-		Logger = NullLogger<BlogDbMigrationService>.Instance;
-	}
-
-	public ILogger<BlogDbMigrationService> Logger { get; set; }
+	public ILogger<BlogDbMigrationService> Logger { get; set; } = NullLogger<BlogDbMigrationService>.Instance;
 
 	public async Task MigrateAsync()
 	{
@@ -55,12 +40,12 @@ public class BlogDbMigrationService : ITransientDependency
 
 		Logger.LogInformation("Successfully completed host database migrations.");
 
-		var tenants = await _tenantRepository.GetListAsync(includeDetails: true);
+		var tenants = await tenantRepository.GetListAsync(includeDetails: true);
 
 		var migratedDatabaseSchemas = new HashSet<string>();
 		foreach (var tenant in tenants)
 		{
-			using (_currentTenant.Change(tenant.Id))
+			using (currentTenant.Change(tenant.Id))
 			{
 				if (tenant.ConnectionStrings.Any())
 				{
@@ -91,7 +76,7 @@ public class BlogDbMigrationService : ITransientDependency
 		Logger.LogInformation(
 			$"Migrating schema for {(tenant == null ? "host" : tenant.Name + " tenant")} database...");
 
-		foreach (var migrator in _dbSchemaMigrators)
+		foreach (var migrator in dbSchemaMigrators)
 		{
 			await migrator.MigrateAsync();
 		}
@@ -101,7 +86,7 @@ public class BlogDbMigrationService : ITransientDependency
 	{
 		Logger.LogInformation($"Executing {(tenant == null ? "host" : tenant.Name + " tenant")} database seed...");
 
-		await _dataSeeder.SeedAsync(new DataSeedContext(tenant?.Id)
+		await dataSeeder.SeedAsync(new DataSeedContext(tenant?.Id)
 			.WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName,
 				IdentityDataSeedContributor.AdminEmailDefaultValue)
 			.WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName,

@@ -11,30 +11,24 @@ using Volo.Abp.Domain.Repositories;
 
 namespace Acme.Blog.Blog.AppServices;
 
-public class BlogAppService : BlogAppServiceBase, IBlogAppService
+public class BlogAppService(
+	IArticleRepository articleRepository,
+	BlogManager blogManager)
+	: BlogAppServiceBase, IBlogAppService
 {
-	private readonly IArticleRepository _articleRepository;
-	private readonly BlogManager _blogManager;
-
-	public BlogAppService(
-		IArticleRepository articleRepository,
-		BlogManager blogManager)
-	{
-		_articleRepository = articleRepository;
-		_blogManager = blogManager;
-	}
+	private readonly BlogManager _blogManager = blogManager;
 
 	public async Task<PagedResultDto<ArticleDto>> GetListAsync(GetArticleDto input)
 	{
-		var items = await _articleRepository.GetPagedListAsync(input.SkipCount, input.MaxResultCount, "Id");
-		var totalCount = await _articleRepository.LongCountAsync();
+		var items = await articleRepository.GetPagedListAsync(input.SkipCount, input.MaxResultCount, "Id");
+		var totalCount = await articleRepository.LongCountAsync();
 
 		return new PagedResultDto<ArticleDto>(totalCount, ObjectMapper.Map<List<Article>, List<ArticleDto>>(items));
 	}
 
 	public async Task<ArticleDetailDto> GetAsync(Guid id)
 	{
-		var article = await _articleRepository.GetAsync(id);
+		var article = await articleRepository.GetAsync(id);
 
 		return ObjectMapper.Map<Article, ArticleDetailDto>(article);
 	}

@@ -7,23 +7,20 @@ using Volo.Abp.OpenIddict.Applications;
 
 namespace Acme.Blog.Pages;
 
-public class IndexModel : AbpPageModel
+public class IndexModel(
+	IOpenIddictApplicationRepository openIdApplicationRepository,
+	ILanguageProvider languageProvider)
+	: AbpPageModel
 {
-	public IndexModel(IOpenIddictApplicationRepository openIdApplicationRepository, ILanguageProvider languageProvider)
-	{
-		OpenIdApplicationRepository = openIdApplicationRepository;
-		LanguageProvider = languageProvider;
-	}
-
 	public List<OpenIddictApplication>? Applications { get; protected set; }
 
 	public IReadOnlyList<LanguageInfo>? Languages { get; protected set; }
 
 	public string? CurrentLanguage { get; protected set; }
 
-	protected IOpenIddictApplicationRepository OpenIdApplicationRepository { get; }
+	protected IOpenIddictApplicationRepository OpenIdApplicationRepository { get; } = openIdApplicationRepository;
 
-	protected ILanguageProvider LanguageProvider { get; }
+	protected ILanguageProvider LanguageProvider { get; } = languageProvider;
 
 	public async Task OnGetAsync()
 	{
