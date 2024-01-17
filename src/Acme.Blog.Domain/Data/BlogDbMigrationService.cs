@@ -13,9 +13,9 @@ using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.TenantManagement;
 
-namespace Acme.Data;
+namespace Acme.Blog.Data;
 
-public class BookStoreDbMigrationService : ITransientDependency
+public class BlogDbMigrationService : ITransientDependency
 {
 	private readonly ICurrentTenant _currentTenant;
 
@@ -23,7 +23,7 @@ public class BookStoreDbMigrationService : ITransientDependency
 	private readonly IEnumerable<IBlogDbSchemaMigrator> _dbSchemaMigrators;
 	private readonly ITenantRepository _tenantRepository;
 
-	public BookStoreDbMigrationService(
+	public BlogDbMigrationService(
 		IDataSeeder dataSeeder,
 		IEnumerable<IBlogDbSchemaMigrator> dbSchemaMigrators,
 		ITenantRepository tenantRepository,
@@ -34,16 +34,19 @@ public class BookStoreDbMigrationService : ITransientDependency
 		_tenantRepository = tenantRepository;
 		_currentTenant = currentTenant;
 
-		Logger = NullLogger<BookStoreDbMigrationService>.Instance;
+		Logger = NullLogger<BlogDbMigrationService>.Instance;
 	}
 
-	public ILogger<BookStoreDbMigrationService> Logger { get; set; }
+	public ILogger<BlogDbMigrationService> Logger { get; set; }
 
 	public async Task MigrateAsync()
 	{
 		var initialMigrationAdded = AddInitialMigrationIfNotExist();
 
-		if (initialMigrationAdded) return;
+		if (initialMigrationAdded)
+		{
+			return;
+		}
 
 		Logger.LogInformation("Started database migrations...");
 
@@ -88,7 +91,10 @@ public class BookStoreDbMigrationService : ITransientDependency
 		Logger.LogInformation(
 			$"Migrating schema for {(tenant == null ? "host" : tenant.Name + " tenant")} database...");
 
-		foreach (var migrator in _dbSchemaMigrators) await migrator.MigrateAsync();
+		foreach (var migrator in _dbSchemaMigrators)
+		{
+			await migrator.MigrateAsync();
+		}
 	}
 
 	private async Task SeedDataAsync(Tenant? tenant = null)
@@ -107,7 +113,10 @@ public class BookStoreDbMigrationService : ITransientDependency
 	{
 		try
 		{
-			if (!DbMigrationsProjectExists()) return false;
+			if (!DbMigrationsProjectExists())
+			{
+				return false;
+			}
 		}
 		catch (Exception)
 		{
@@ -181,7 +190,10 @@ public class BookStoreDbMigrationService : ITransientDependency
 	{
 		var slnDirectoryPath = GetSolutionDirectoryPath();
 
-		if (slnDirectoryPath == null) throw new Exception("Solution folder not found!");
+		if (slnDirectoryPath == null)
+		{
+			throw new Exception("Solution folder not found!");
+		}
 
 		var srcDirectoryPath = Path.Combine(slnDirectoryPath, "src");
 
@@ -199,7 +211,9 @@ public class BookStoreDbMigrationService : ITransientDependency
 
 			if (currentDirectory != null &&
 			    Directory.GetFiles(currentDirectory.FullName).FirstOrDefault(f => f.EndsWith(".sln")) != null)
+			{
 				return currentDirectory.FullName;
+			}
 		}
 
 		return null;

@@ -1,10 +1,10 @@
-﻿using Acme.EntityFrameworkCore;
-using Volo.Abp.Modularity;
+﻿using Volo.Abp.Modularity;
 
-namespace Acme;
+namespace Acme.Blog;
 
 [DependsOn(
-	typeof(BlogEntityFrameworkCoreTestModule)
+	typeof(BlogDomainModule),
+	typeof(BlogTestBaseModule)
 )]
 public class BlogDomainTestModule : AbpModule
 {

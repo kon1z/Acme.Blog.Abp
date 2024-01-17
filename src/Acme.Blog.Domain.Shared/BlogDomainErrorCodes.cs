@@ -1,4 +1,4 @@
-﻿namespace Acme;
+﻿namespace Acme.Blog;
 
 public static class BlogDomainErrorCodes
 {

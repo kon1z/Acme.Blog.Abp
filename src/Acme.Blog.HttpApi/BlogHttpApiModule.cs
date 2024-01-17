@@ -1,4 +1,4 @@
-﻿using Acme.Localization;
+﻿using Acme.Blog.Localization;
 using Localization.Resources.AbpUi;
 using Volo.Abp.Account;
 using Volo.Abp.FeatureManagement;
@@ -9,7 +9,7 @@ using Volo.Abp.PermissionManagement.HttpApi;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 
-namespace Acme;
+namespace Acme.Blog;
 
 [DependsOn(
 	typeof(BlogApplicationContractsModule),

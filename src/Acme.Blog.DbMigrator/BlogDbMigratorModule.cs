@@ -1,4 +1,4 @@
-﻿using Acme.EntityFrameworkCore;
+﻿using Acme.Blog.EntityFrameworkCore;
 using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
 using Volo.Abp.Caching.StackExchangeRedis;

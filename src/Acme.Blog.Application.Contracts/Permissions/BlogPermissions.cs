@@ -1,4 +1,4 @@
-﻿namespace Acme.Permissions;
+﻿namespace Acme.Blog.Permissions;
 
 public static class BlogPermissions
 {

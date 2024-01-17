@@ -1,4 +1,4 @@
-﻿using Acme.MultiTenancy;
+﻿using Acme.Blog.MultiTenancy;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Volo.Abp.AuditLogging;
@@ -15,7 +15,7 @@ using Volo.Abp.PermissionManagement.OpenIddict;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 
-namespace Acme;
+namespace Acme.Blog;
 
 [DependsOn(
 	typeof(BlogDomainSharedModule),

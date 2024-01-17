@@ -1,5 +1,8 @@
-﻿namespace Acme;
+﻿using Volo.Abp.Modularity;
 
-public abstract class BlogApplicationTestBase : BlogTestBase<BlogApplicationTestModule>
+namespace Acme.Blog;
+
+public abstract class BlogApplicationTestBase<TStartupModule> : BlogTestBase<TStartupModule>
+	where TStartupModule : IAbpModule
 {
 }

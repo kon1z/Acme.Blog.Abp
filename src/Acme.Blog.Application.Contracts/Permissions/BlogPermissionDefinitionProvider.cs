@@ -1,8 +1,8 @@
-﻿using Acme.Localization;
+﻿using Acme.Blog.Localization;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Localization;
 
-namespace Acme.Permissions;
+namespace Acme.Blog.Permissions;
 
 public class BlogPermissionDefinitionProvider : PermissionDefinitionProvider
 {

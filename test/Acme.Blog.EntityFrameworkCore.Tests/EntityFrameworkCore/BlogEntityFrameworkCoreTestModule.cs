@@ -11,11 +11,11 @@ using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.Uow;
 
-namespace Acme.EntityFrameworkCore;
+namespace Acme.Blog.EntityFrameworkCore;
 
 [DependsOn(
+	typeof(BlogApplicationTestModule),
 	typeof(BlogEntityFrameworkCoreModule),
-	typeof(BlogTestBaseModule),
 	typeof(AbpEntityFrameworkCoreSqliteModule)
 )]
 public class BlogEntityFrameworkCoreTestModule : AbpModule

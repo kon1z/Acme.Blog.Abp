@@ -1,7 +1,7 @@
-﻿using Acme.Blog.IRepositories;
+﻿using Acme.Blog.Blog.IRepositories;
 using Volo.Abp.Domain.Services;
 
-namespace Acme.Blog.Managers;
+namespace Acme.Blog.Blog.Managers;
 
 public class BlogManager : DomainService
 {

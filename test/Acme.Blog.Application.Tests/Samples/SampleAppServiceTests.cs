@@ -1,20 +1,22 @@
 ﻿using System.Threading.Tasks;
 using Shouldly;
 using Volo.Abp.Identity;
+using Volo.Abp.Modularity;
 using Xunit;
 
-namespace Acme.Samples;
+namespace Acme.Blog.Samples;
 
 /* This is just an example test class.
  * Normally, you don't test code of the modules you are using
  * (like IIdentityUserAppService here).
  * Only test your own application services.
  */
-public class SampleAppServiceTests : BlogApplicationTestBase
+public abstract class SampleAppServiceTests<TStartupModule> : BlogApplicationTestBase<TStartupModule>
+	where TStartupModule : IAbpModule
 {
 	private readonly IIdentityUserAppService _userAppService;
 
-	public SampleAppServiceTests()
+	protected SampleAppServiceTests()
 	{
 		_userAppService = GetRequiredService<IIdentityUserAppService>();
 	}

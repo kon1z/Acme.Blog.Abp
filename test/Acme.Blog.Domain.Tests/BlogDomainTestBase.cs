@@ -1,5 +1,9 @@
-﻿namespace Acme;
+﻿using Volo.Abp.Modularity;
 
-public abstract class BlogDomainTestBase : BlogTestBase<BlogDomainTestModule>
+namespace Acme.Blog;
+
+/* Inherit from this class for your domain layer tests. */
+public abstract class BlogDomainTestBase<TStartupModule> : BlogTestBase<TStartupModule>
+	where TStartupModule : IAbpModule
 {
 }

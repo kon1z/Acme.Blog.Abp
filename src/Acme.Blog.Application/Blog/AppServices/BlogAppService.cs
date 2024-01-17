@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Acme.Blog.Dtos;
-using Acme.Blog.Entities;
-using Acme.Blog.IAppServices;
-using Acme.Blog.IRepositories;
-using Acme.Blog.Managers;
+using Acme.Blog.Blog.Dtos;
+using Acme.Blog.Blog.Entities;
+using Acme.Blog.Blog.IAppServices;
+using Acme.Blog.Blog.IRepositories;
+using Acme.Blog.Blog.Managers;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Domain.Repositories;
 
-namespace Acme.Blog.AppServices;
+namespace Acme.Blog.Blog.AppServices;
 
-public class BlogAppService : AcmeBlogAppService, IBlogAppService
+public class BlogAppService : BlogAppServiceBase, IBlogAppService
 {
 	private readonly IArticleRepository _articleRepository;
 	private readonly BlogManager _blogManager;

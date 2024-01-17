@@ -16,7 +16,7 @@ using Volo.Abp.OpenIddict.Scopes;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.Uow;
 
-namespace Acme.OpenIddict;
+namespace Acme.Blog.OpenIddict;
 
 /* Creates initial data that is needed to property run the application
  * and make client-to-server communication possible.
@@ -58,11 +58,13 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 
 	private async Task CreateScopesAsync()
 	{
-		if (await _openIddictScopeRepository.FindByNameAsync("BookStore") == null)
+		if (await _openIddictScopeRepository.FindByNameAsync("Blog") == null)
+		{
 			await _scopeManager.CreateAsync(new OpenIddictScopeDescriptor
 			{
-				Name = "BookStore", DisplayName = "BookStore API", Resources = { "BookStore" }
+				Name = "Blog", DisplayName = "Blog API", Resources = { "Blog" }
 			});
+		}
 	}
 
 	private async Task CreateApplicationsAsync()
@@ -74,41 +76,43 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 			OpenIddictConstants.Permissions.Scopes.Phone,
 			OpenIddictConstants.Permissions.Scopes.Profile,
 			OpenIddictConstants.Permissions.Scopes.Roles,
-			"BookStore"
+			"Blog"
 		};
 
 		var configurationSection = _configuration.GetSection("OpenIddict:Applications");
 
 
-		// Blazor Server Tiered Client
-		var blazorServerTieredClientId = configurationSection["BookStore_BlazorServerTiered:ClientId"];
-		if (!blazorServerTieredClientId.IsNullOrWhiteSpace())
+		//Console Test / Angular Client
+		var consoleAndAngularClientId = configurationSection["Blog_App:ClientId"];
+		if (!consoleAndAngularClientId.IsNullOrWhiteSpace())
 		{
-			var blazorServerTieredRootUrl =
-				configurationSection["BookStore_BlazorServerTiered:RootUrl"]!.EnsureEndsWith('/');
-
+			var consoleAndAngularClientRootUrl = configurationSection["Blog_App:RootUrl"]?.TrimEnd('/');
 			await CreateApplicationAsync(
-				blazorServerTieredClientId!,
-				OpenIddictConstants.ClientTypes.Confidential,
+				consoleAndAngularClientId!,
+				OpenIddictConstants.ClientTypes.Public,
 				OpenIddictConstants.ConsentTypes.Implicit,
-				"Blazor Server Application",
-				configurationSection["BookStore_BlazorServerTiered:ClientSecret"] ?? "1q2w3e*",
-				new List<string> //Hybrid flow
+				"Console Test / Angular Application",
+				null,
+				new List<string>
 				{
-					OpenIddictConstants.GrantTypes.AuthorizationCode, OpenIddictConstants.GrantTypes.Implicit
+					OpenIddictConstants.GrantTypes.AuthorizationCode,
+					OpenIddictConstants.GrantTypes.Password,
+					OpenIddictConstants.GrantTypes.ClientCredentials,
+					OpenIddictConstants.GrantTypes.RefreshToken
 				},
 				commonScopes,
-				redirectUri: $"{blazorServerTieredRootUrl}signin-oidc",
-				clientUri: blazorServerTieredRootUrl,
-				postLogoutRedirectUri: $"{blazorServerTieredRootUrl}signout-callback-oidc"
+				redirectUri: consoleAndAngularClientRootUrl,
+				clientUri: consoleAndAngularClientRootUrl,
+				postLogoutRedirectUri: consoleAndAngularClientRootUrl
 			);
 		}
 
+
 		// Swagger Client
-		var swaggerClientId = configurationSection["BookStore_Swagger:ClientId"];
+		var swaggerClientId = configurationSection["Blog_Swagger:ClientId"];
 		if (!swaggerClientId.IsNullOrWhiteSpace())
 		{
-			var swaggerRootUrl = configurationSection["BookStore_Swagger:RootUrl"]?.TrimEnd('/');
+			var swaggerRootUrl = configurationSection["Blog_Swagger:RootUrl"]?.TrimEnd('/');
 
 			await CreateApplicationAsync(
 				swaggerClientId!,
@@ -139,11 +143,15 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 	{
 		if (!string.IsNullOrEmpty(secret) && string.Equals(type, OpenIddictConstants.ClientTypes.Public,
 			    StringComparison.OrdinalIgnoreCase))
+		{
 			throw new BusinessException(L["NoClientSecretCanBeSetForPublicApplications"]);
+		}
 
 		if (string.IsNullOrEmpty(secret) && string.Equals(type, OpenIddictConstants.ClientTypes.Confidential,
 			    StringComparison.OrdinalIgnoreCase))
+		{
 			throw new BusinessException(L["TheClientSecretIsRequiredForConfidentialApplications"]);
+		}
 
 		var client = await _openIddictApplicationRepository.FindByClientIdAsync(name);
 
@@ -173,7 +181,9 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 		}
 
 		if (!redirectUri.IsNullOrWhiteSpace() || !postLogoutRedirectUri.IsNullOrWhiteSpace())
+		{
 			application.Permissions.Add(OpenIddictConstants.Permissions.Endpoints.Logout);
+		}
 
 		var buildInGrantTypes = new[]
 		{
@@ -192,7 +202,9 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 
 			if (grantType == OpenIddictConstants.GrantTypes.AuthorizationCode ||
 			    grantType == OpenIddictConstants.GrantTypes.Implicit)
+			{
 				application.Permissions.Add(OpenIddictConstants.Permissions.Endpoints.Authorization);
+			}
 
 			if (grantType == OpenIddictConstants.GrantTypes.AuthorizationCode ||
 			    grantType == OpenIddictConstants.GrantTypes.ClientCredentials ||
@@ -206,16 +218,24 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 			}
 
 			if (grantType == OpenIddictConstants.GrantTypes.ClientCredentials)
+			{
 				application.Permissions.Add(OpenIddictConstants.Permissions.GrantTypes.ClientCredentials);
+			}
 
 			if (grantType == OpenIddictConstants.GrantTypes.Implicit)
+			{
 				application.Permissions.Add(OpenIddictConstants.Permissions.GrantTypes.Implicit);
+			}
 
 			if (grantType == OpenIddictConstants.GrantTypes.Password)
+			{
 				application.Permissions.Add(OpenIddictConstants.Permissions.GrantTypes.Password);
+			}
 
 			if (grantType == OpenIddictConstants.GrantTypes.RefreshToken)
+			{
 				application.Permissions.Add(OpenIddictConstants.Permissions.GrantTypes.RefreshToken);
+			}
 
 			if (grantType == OpenIddictConstants.GrantTypes.DeviceCode)
 			{
@@ -234,7 +254,9 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 			}
 
 			if (!buildInGrantTypes.Contains(grantType))
+			{
 				application.Permissions.Add(OpenIddictConstants.Permissions.Prefixes.GrantType + grantType);
+			}
 		}
 
 		var buildInScopes = new[]
@@ -245,36 +267,58 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 		};
 
 		foreach (var scope in scopes)
+		{
 			if (buildInScopes.Contains(scope))
+			{
 				application.Permissions.Add(scope);
+			}
 			else
+			{
 				application.Permissions.Add(OpenIddictConstants.Permissions.Prefixes.Scope + scope);
+			}
+		}
 
 		if (redirectUri != null)
+		{
 			if (!redirectUri.IsNullOrEmpty())
 			{
 				if (!Uri.TryCreate(redirectUri, UriKind.Absolute, out var uri) || !uri.IsWellFormedOriginalString())
+				{
 					throw new BusinessException(L["InvalidRedirectUri", redirectUri]);
+				}
 
-				if (application.RedirectUris.All(x => x != uri)) application.RedirectUris.Add(uri);
+				if (application.RedirectUris.All(x => x != uri))
+				{
+					application.RedirectUris.Add(uri);
+				}
 			}
+		}
 
 		if (postLogoutRedirectUri != null)
+		{
 			if (!postLogoutRedirectUri.IsNullOrEmpty())
 			{
 				if (!Uri.TryCreate(postLogoutRedirectUri, UriKind.Absolute, out var uri) ||
 				    !uri.IsWellFormedOriginalString())
+				{
 					throw new BusinessException(L["InvalidPostLogoutRedirectUri", postLogoutRedirectUri]);
+				}
 
-				if (application.PostLogoutRedirectUris.All(x => x != uri)) application.PostLogoutRedirectUris.Add(uri);
+				if (application.PostLogoutRedirectUris.All(x => x != uri))
+				{
+					application.PostLogoutRedirectUris.Add(uri);
+				}
 			}
+		}
 
 		if (permissions != null)
+		{
 			await _permissionDataSeeder.SeedAsync(
 				ClientPermissionValueProvider.ProviderName,
 				name,
 				permissions
 			);
+		}
 
 		if (client == null)
 		{

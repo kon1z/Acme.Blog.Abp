@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 
-namespace Acme;
+namespace Acme.Blog;
 
 public class Program
 {
@@ -40,7 +40,10 @@ public class Program
 		}
 		catch (Exception ex)
 		{
-			if (ex is HostAbortedException) throw;
+			if (ex is HostAbortedException)
+			{
+				throw;
+			}
 
 			Log.Fatal(ex, "Host terminated unexpectedly!");
 			return 1;

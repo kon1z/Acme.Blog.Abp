@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0</TargetFrameworks>
     <Nullable>enable</Nullable>
-    <RootNamespace>Acme</RootNamespace>
+    <RootNamespace>Acme.Blog</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

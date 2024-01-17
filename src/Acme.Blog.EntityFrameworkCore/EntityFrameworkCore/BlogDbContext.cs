@@ -1,12 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Acme.Blog.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -16,7 +13,7 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
-namespace Acme.EntityFrameworkCore;
+namespace Acme.Blog.EntityFrameworkCore;
 
 [ReplaceDbContext(typeof(IIdentityDbContext))]
 [ReplaceDbContext(typeof(ITenantManagementDbContext))]
@@ -30,13 +27,6 @@ public class BlogDbContext :
 		: base(options)
 	{
 	}
-
-	public DbSet<Article> Articles { get; set; }
-
-	public DbSet<Lable> Labels { get; set; }
-
-	public DbSet<Category> Categories { get; set; }
-
 
 	protected override void OnModelCreating(ModelBuilder builder)
 	{
@@ -53,35 +43,15 @@ public class BlogDbContext :
 		builder.ConfigureFeatureManagement();
 		builder.ConfigureTenantManagement();
 
-		builder.Entity<Article>(b =>
-		{
-			b.ToTable(BlogConsts.DbTablePrefix + "Article", BlogConsts.DbSchema);
+		/* Configure your own tables/entities inside here */
 
-			b.Property(x => x.Title).IsRequired().HasMaxLength(128);
-			b.Property(x => x.Content).HasColumnType(DataType.Text.ToString());
-
-			b.ConfigureByConvention();
-		});
-
-		builder.Entity<Lable>(r =>
-		{
-			r.ToTable(BlogConsts.DbTablePrefix + "Label", BlogConsts.DbSchema);
-
-			r.Property(x => x.Name).IsRequired().HasMaxLength(128);
-
-			r.ConfigureByConvention();
-		});
-
-        builder.Entity<Category>(r =>
-        {
-            r.ToTable(BlogConsts.DbTablePrefix + "Category", BlogConsts.DbSchema);
-
-            r.Property(x => x.Name).IsRequired().HasMaxLength(128);
-
-            r.ConfigureByConvention();
-        });
-
-    }
+		//builder.Entity<YourEntity>(b =>
+		//{
+		//    b.ToTable(BlogConsts.DbTablePrefix + "YourEntities", BlogConsts.DbSchema);
+		//    b.ConfigureByConvention(); //auto configure for the base class props
+		//    //...
+		//});
+	}
 	/* Add DbSet properties for your Aggregate Roots / Entities here. */
 
 	#region Entities from the modules

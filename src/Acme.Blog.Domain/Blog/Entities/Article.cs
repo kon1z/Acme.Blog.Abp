@@ -1,7 +1,7 @@
 ﻿using System;
 using Volo.Abp.Domain.Entities.Auditing;
 
-namespace Acme.Blog.Entities;
+namespace Acme.Blog.Blog.Entities;
 
 public class Article : FullAuditedAggregateRoot<Guid>
 {

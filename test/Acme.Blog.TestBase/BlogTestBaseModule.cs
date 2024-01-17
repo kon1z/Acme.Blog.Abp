@@ -7,20 +7,16 @@ using Volo.Abp.Data;
 using Volo.Abp.Modularity;
 using Volo.Abp.Threading;
 
-namespace Acme;
+namespace Acme.Blog;
 
 [DependsOn(
 	typeof(AbpAutofacModule),
 	typeof(AbpTestBaseModule),
 	typeof(AbpAuthorizationModule),
-	typeof(BlogDomainModule)
+	typeof(AbpBackgroundJobsAbstractionsModule)
 )]
 public class BlogTestBaseModule : AbpModule
 {
-	public override void PreConfigureServices(ServiceConfigurationContext context)
-	{
-	}
-
 	public override void ConfigureServices(ServiceConfigurationContext context)
 	{
 		Configure<AbpBackgroundJobOptions>(options => { options.IsJobExecutionEnabled = false; });

@@ -252,13 +252,14 @@ paket-files/
 *.sln.iml
 
 # Blog
+src/Acme.Blog.Web/Logs/*
+src/Acme.Blog.Web.Host/Logs/*
 src/Acme.Blog.AuthServer/Logs/*
 src/Acme.Blog.HttpApi.Host/Logs/*
+src/Acme.Blog.HttpApi.Host/Logs/*
 src/Acme.Blog.DbMigrator/Logs/*
-src/Acme.Blog.Admin.Blazor/Logs/*
-src/Acme.Blog.Front.Blazor/Logs/*
+src/Acme.Blog.Blazor.Server/Logs/*
+src/Acme.Blog.Blazor.Server.Tiered/Logs/*
 
 # Use abp install-libs to restore.
 **/wwwroot/libs/*
-/src/Acme.Blog.AuthServer.Blazor/appsettings.Development.json
-/src/Acme.Blog.DbMigrator/appsettings.secrets.json

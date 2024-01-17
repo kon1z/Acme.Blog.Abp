@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Acme.Data;
+using Acme.Blog.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -35,7 +35,7 @@ public class DbMigratorHostedService : IHostedService
 
 			await application
 				.ServiceProvider
-				.GetRequiredService<IBlogDbSchemaMigrator>()
+				.GetRequiredService<BlogDbMigrationService>()
 				.MigrateAsync();
 
 			await application.ShutdownAsync();

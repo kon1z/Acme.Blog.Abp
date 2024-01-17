@@ -6,7 +6,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.Testing;
 using Volo.Abp.Uow;
 
-namespace Acme;
+namespace Acme.Blog;
 
 /* All test classes are derived from this class, directly or indirectly.
  */

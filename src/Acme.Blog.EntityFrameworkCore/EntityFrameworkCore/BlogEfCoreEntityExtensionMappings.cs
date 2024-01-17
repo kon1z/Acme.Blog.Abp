@@ -1,6 +1,6 @@
 ﻿using Volo.Abp.Threading;
 
-namespace Acme.EntityFrameworkCore;
+namespace Acme.Blog.EntityFrameworkCore;
 
 public static class BlogEfCoreEntityExtensionMappings
 {

@@ -1,6 +1,6 @@
 ﻿using Volo.Abp.Threading;
 
-namespace Acme;
+namespace Acme.Blog;
 
 public static class BlogGlobalFeatureConfigurator
 {

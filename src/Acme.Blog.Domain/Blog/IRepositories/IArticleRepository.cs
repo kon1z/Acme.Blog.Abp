@@ -1,8 +1,8 @@
 ﻿using System;
-using Acme.Blog.Entities;
+using Acme.Blog.Blog.Entities;
 using Volo.Abp.Domain.Repositories;
 
-namespace Acme.Blog.IRepositories;
+namespace Acme.Blog.Blog.IRepositories;
 
 public interface IArticleRepository : IRepository<Article, Guid>
 {

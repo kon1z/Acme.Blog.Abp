@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
 
-namespace Acme.Data;
+namespace Acme.Blog.Data;
 
 /* This is used if database provider does't define
  * IBlogDbSchemaMigrator implementation.

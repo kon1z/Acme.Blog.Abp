@@ -8,7 +8,7 @@ using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Acme;
+namespace Acme.Blog;
 
 [DependsOn(
 	typeof(BlogApplicationContractsModule),

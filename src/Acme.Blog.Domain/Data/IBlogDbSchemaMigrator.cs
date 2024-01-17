@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Acme.Data;
+namespace Acme.Blog.Data;
 
 public interface IBlogDbSchemaMigrator
 {

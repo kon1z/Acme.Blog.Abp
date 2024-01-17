@@ -5,15 +5,16 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <RootNamespace>Acme</RootNamespace>
+    <RootNamespace>Acme.Blog</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Acme.Blog.EntityFrameworkCore.Tests\Acme.Blog.EntityFrameworkCore.Tests.csproj" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <ProjectReference Include="..\..\src\Acme.Blog.Domain\Acme.Blog.Domain.csproj" />
+    <ProjectReference Include="..\Acme.Blog.TestBase\Acme.Blog.TestBase.csproj" />
   </ItemGroup>
 
 </Project>

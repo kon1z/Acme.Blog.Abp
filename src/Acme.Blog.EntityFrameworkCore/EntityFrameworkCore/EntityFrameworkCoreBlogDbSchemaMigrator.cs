@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Acme.Data;
+using Acme.Blog.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.DependencyInjection;
 
-namespace Acme.EntityFrameworkCore;
+namespace Acme.Blog.EntityFrameworkCore;
 
 public class EntityFrameworkCoreBlogDbSchemaMigrator
 	: IBlogDbSchemaMigrator, ITransientDependency
@@ -20,7 +20,7 @@ public class EntityFrameworkCoreBlogDbSchemaMigrator
 
 	public async Task MigrateAsync()
 	{
-		/* We intentionally resolving the BlogDbContext
+		/* We intentionally resolve the BlogDbContext
 		 * from IServiceProvider (instead of directly injecting it)
 		 * to properly get the connection string of the current tenant in the
 		 * current scope.

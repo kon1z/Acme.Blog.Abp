@@ -1,6 +1,6 @@
 ﻿using Volo.Abp.Modularity;
 
-namespace Acme;
+namespace Acme.Blog;
 
 [DependsOn(
 	typeof(BlogApplicationModule),

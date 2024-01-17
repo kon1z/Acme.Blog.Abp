@@ -1,4 +1,4 @@
-﻿using Acme.Localization;
+﻿using Acme.Blog.Localization;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.FeatureManagement;
@@ -13,7 +13,7 @@ using Volo.Abp.TenantManagement;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Acme;
+namespace Acme.Blog;
 
 [DependsOn(
 	typeof(AbpAuditLoggingDomainSharedModule),

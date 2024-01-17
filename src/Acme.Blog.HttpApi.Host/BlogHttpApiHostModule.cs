@@ -2,65 +2,107 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Acme.EntityFrameworkCore;
-using Acme.MultiTenancy;
-using Medallion.Threading;
-using Medallion.Threading.Redis;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Acme.Blog.EntityFrameworkCore;
+using Acme.Blog.MultiTenancy;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using StackExchange.Redis;
+using OpenIddict.Validation.AspNetCore;
 using Volo.Abp;
+using Volo.Abp.Account;
+using Volo.Abp.Account.Web;
+using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
+using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
-using Volo.Abp.Caching;
-using Volo.Abp.Caching.StackExchangeRedis;
-using Volo.Abp.DistributedLocking;
 using Volo.Abp.Modularity;
+using Volo.Abp.Security.Claims;
 using Volo.Abp.Swashbuckle;
+using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Acme;
+namespace Acme.Blog;
 
 [DependsOn(
 	typeof(BlogHttpApiModule),
 	typeof(AbpAutofacModule),
-	typeof(AbpCachingStackExchangeRedisModule),
-	typeof(AbpDistributedLockingModule),
-	typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
+	typeof(AbpAspNetCoreMultiTenancyModule),
 	typeof(BlogApplicationModule),
 	typeof(BlogEntityFrameworkCoreModule),
+	typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
+	typeof(AbpAccountWebOpenIddictModule),
 	typeof(AbpAspNetCoreSerilogModule),
 	typeof(AbpSwashbuckleModule)
 )]
 public class BlogHttpApiHostModule : AbpModule
 {
+	public override void PreConfigureServices(ServiceConfigurationContext context)
+	{
+		PreConfigure<OpenIddictBuilder>(builder =>
+		{
+			builder.AddValidation(options =>
+			{
+				options.AddAudiences("Blog");
+				options.UseLocalServer();
+				options.UseAspNetCore();
+			});
+		});
+	}
+
 	public override void ConfigureServices(ServiceConfigurationContext context)
 	{
 		var configuration = context.Services.GetConfiguration();
 		var hostingEnvironment = context.Services.GetHostingEnvironment();
 
+		ConfigureAuthentication(context);
+		ConfigureBundles();
+		ConfigureUrls(configuration);
 		ConfigureConventionalControllers();
-		ConfigureAuthentication(context, configuration);
-		ConfigureCache(configuration);
 		ConfigureVirtualFileSystem(context);
-		ConfigureDataProtection(context, configuration, hostingEnvironment);
-		ConfigureDistributedLocking(context, configuration);
 		ConfigureCors(context, configuration);
 		ConfigureSwaggerServices(context, configuration);
 	}
 
-	private void ConfigureCache(IConfiguration configuration)
+	private void ConfigureAuthentication(ServiceConfigurationContext context)
 	{
-		Configure<AbpDistributedCacheOptions>(options => { options.KeyPrefix = "Blog:"; });
+		context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults
+			.AuthenticationScheme);
+		context.Services.Configure<AbpClaimsPrincipalFactoryOptions>(options =>
+		{
+			options.IsDynamicClaimsEnabled = true;
+		});
+	}
+
+	private void ConfigureBundles()
+	{
+		Configure<AbpBundlingOptions>(options =>
+		{
+			options.StyleBundles.Configure(
+				LeptonXLiteThemeBundles.Styles.Global,
+				bundle => { bundle.AddFiles("/global-styles.css"); }
+			);
+		});
+	}
+
+	private void ConfigureUrls(IConfiguration configuration)
+	{
+		Configure<AppUrlOptions>(options =>
+		{
+			options.Applications["MVC"].RootUrl = configuration["App:SelfUrl"];
+			options.RedirectAllowedUrls.AddRange(configuration["App:RedirectAllowedUrls"]?.Split(',') ??
+			                                     Array.Empty<string>());
+
+			options.Applications["Angular"].RootUrl = configuration["App:ClientUrl"];
+			options.Applications["Angular"].Urls[AccountUrlNames.PasswordReset] = "account/reset-password";
+		});
 	}
 
 	private void ConfigureVirtualFileSystem(ServiceConfigurationContext context)
@@ -68,6 +110,7 @@ public class BlogHttpApiHostModule : AbpModule
 		var hostingEnvironment = context.Services.GetHostingEnvironment();
 
 		if (hostingEnvironment.IsDevelopment())
+		{
 			Configure<AbpVirtualFileSystemOptions>(options =>
 			{
 				options.FileSets.ReplaceEmbeddedByPhysical<BlogDomainSharedModule>(
@@ -83,6 +126,7 @@ public class BlogHttpApiHostModule : AbpModule
 					Path.Combine(hostingEnvironment.ContentRootPath,
 						$"..{Path.DirectorySeparatorChar}Acme.Blog.Application"));
 			});
+		}
 	}
 
 	private void ConfigureConventionalControllers()
@@ -93,21 +137,10 @@ public class BlogHttpApiHostModule : AbpModule
 		});
 	}
 
-	private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
-	{
-		context.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-			.AddJwtBearer(options =>
-			{
-				options.Authority = configuration["AuthServer:Authority"];
-				options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
-				options.Audience = "Blog";
-			});
-	}
-
 	private static void ConfigureSwaggerServices(ServiceConfigurationContext context, IConfiguration configuration)
 	{
 		context.Services.AddAbpSwaggerGenWithOAuth(
-			configuration["AuthServer:Authority"],
+			configuration["AuthServer:Authority"]!,
 			new Dictionary<string, string>
 			{
 				{ "Blog", "Blog API" }
@@ -118,31 +151,6 @@ public class BlogHttpApiHostModule : AbpModule
 				options.DocInclusionPredicate((docName, description) => true);
 				options.CustomSchemaIds(type => type.FullName);
 			});
-	}
-
-	private void ConfigureDataProtection(
-		ServiceConfigurationContext context,
-		IConfiguration configuration,
-		IWebHostEnvironment hostingEnvironment)
-	{
-		var dataProtectionBuilder = context.Services.AddDataProtection().SetApplicationName("Blog");
-		if (!hostingEnvironment.IsDevelopment())
-		{
-			var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]!);
-			dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "Blog-Protection-Keys");
-		}
-	}
-
-	private void ConfigureDistributedLocking(
-		ServiceConfigurationContext context,
-		IConfiguration configuration)
-	{
-		context.Services.AddSingleton<IDistributedLockProvider>(sp =>
-		{
-			var connection = ConnectionMultiplexer
-				.Connect(configuration["Redis:Configuration"]!);
-			return new RedisDistributedSynchronizationProvider(connection.GetDatabase());
-		});
 	}
 
 	private void ConfigureCors(ServiceConfigurationContext context, IConfiguration configuration)
@@ -170,32 +178,46 @@ public class BlogHttpApiHostModule : AbpModule
 		var app = context.GetApplicationBuilder();
 		var env = context.GetEnvironment();
 
-		if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
+		if (env.IsDevelopment())
+		{
+			app.UseDeveloperExceptionPage();
+		}
 
 		app.UseAbpRequestLocalization();
+
+		if (!env.IsDevelopment())
+		{
+			app.UseErrorPage();
+		}
+
 		app.UseCorrelationId();
 		app.UseStaticFiles();
 		app.UseRouting();
 		app.UseCors();
 		app.UseAuthentication();
+		app.UseAbpOpenIddictValidation();
 
-		if (MultiTenancyConsts.IsEnabled) app.UseMultiTenancy();
+		if (MultiTenancyConsts.IsEnabled)
+		{
+			app.UseMultiTenancy();
+		}
 
+		app.UseUnitOfWork();
+		app.UseDynamicClaims();
 		app.UseAuthorization();
 
 		app.UseSwagger();
-		app.UseAbpSwaggerUI(options =>
+		app.UseAbpSwaggerUI(c =>
 		{
-			options.SwaggerEndpoint("/swagger/v1/swagger.json", "Blog API");
+			c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blog API");
 
-			var configuration = context.GetConfiguration();
-			options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
-			options.OAuthScopes("Blog");
+			var configuration = context.ServiceProvider.GetRequiredService<IConfiguration>();
+			c.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
+			c.OAuthScopes("Blog");
 		});
 
 		app.UseAuditing();
 		app.UseAbpSerilogEnrichers();
-		app.UseUnitOfWork();
 		app.UseConfiguredEndpoints();
 	}
 }
