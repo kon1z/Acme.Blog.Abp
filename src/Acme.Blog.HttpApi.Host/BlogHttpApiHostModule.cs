@@ -16,13 +16,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Acme.Auditing.Elasticsearch;
 using Volo.Abp;
-using Volo.Abp.Account;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
@@ -31,7 +29,6 @@ using Volo.Abp.DistributedLocking;
 using Volo.Abp.Modularity;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Swashbuckle;
-using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
 
 namespace Acme.Blog;
@@ -45,7 +42,8 @@ namespace Acme.Blog;
 	typeof(BlogEntityFrameworkCoreModule),
 	typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
 	typeof(AbpAspNetCoreSerilogModule),
-	typeof(AbpSwashbuckleModule)
+	typeof(AbpSwashbuckleModule),
+	typeof(AcmeAuditingElasticsearchModule)
 )]
 public class BlogHttpApiHostModule : AbpModule
 {

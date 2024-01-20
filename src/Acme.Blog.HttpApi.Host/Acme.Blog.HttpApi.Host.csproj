@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\framework\Acme.Auditing.Elasticsearch\Acme.Auditing.Elasticsearch.csproj" />
     <ProjectReference Include="..\Acme.Blog.Application\Acme.Blog.Application.csproj" />
     <ProjectReference Include="..\Acme.Blog.EntityFrameworkCore\Acme.Blog.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Acme.Blog.HttpApi\Acme.Blog.HttpApi.csproj" />
