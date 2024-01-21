@@ -1,4 +1,6 @@
-﻿namespace Acme.Blog.Blog.Dtos;
+﻿using Acme.Blog.Blog.Dto;
+
+namespace Acme.Blog.Blog.Dto;
 
 public class ArticleDetailDto : ArticleDto
 {

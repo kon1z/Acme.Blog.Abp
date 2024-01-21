@@ -34,7 +34,8 @@ namespace Acme.Auditing.Elasticsearch
 					options.Authentication(new BasicAuthentication(options.Username, options.Password));
 				}
 
-				options.RequestIndexName = configuration["Elasticsearch:RequestIndexName"] ?? "request";
+				options.Environment = context.Services.GetAbpHostEnvironment().EnvironmentName ?? "Development";
+				options.RequestIndexName = configuration["Elasticsearch:RequestIndexName"] ?? "Request";
 			});
 
 			// TODO Link Test

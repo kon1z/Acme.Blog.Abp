@@ -11,6 +11,8 @@ namespace Acme.Auditing.Elasticsearch
 		public string? Username { get; set; }
 		public string? Password { get; set; }
 
+		public string Environment { get; set; } = null!;
+
 		public string RequestIndexName { get; set; } = null!;
 	}
 }

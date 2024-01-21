@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Acme.Blog.Blog.Dtos;
+﻿using Acme.Blog.Blog.Dto;
 using Acme.Blog.Blog.Entities;
 using Acme.Blog.Blog.IAppServices;
 using Acme.Blog.Blog.IRepositories;
 using Acme.Blog.Blog.Managers;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Domain.Repositories;
 
@@ -16,8 +16,6 @@ public class BlogAppService(
 	BlogManager blogManager)
 	: BlogAppServiceBase, IBlogAppService
 {
-	private readonly BlogManager _blogManager = blogManager;
-
 	public async Task<PagedResultDto<ArticleDto>> GetListAsync(GetArticleDto input)
 	{
 		var items = await articleRepository.GetPagedListAsync(input.SkipCount, input.MaxResultCount, "Id");
@@ -30,6 +28,12 @@ public class BlogAppService(
 	{
 		var article = await articleRepository.GetAsync(id);
 
+		return ObjectMapper.Map<Article, ArticleDetailDto>(article);
+	}
+
+	public async Task<ArticleDetailDto> CreateAsync(CreateArticleInput input)
+	{
+		var article = await blogManager.CreateArticleAsync(input.Title, input.Content);
 		return ObjectMapper.Map<Article, ArticleDetailDto>(article);
 	}
 }

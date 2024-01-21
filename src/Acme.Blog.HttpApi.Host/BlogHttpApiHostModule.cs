@@ -1,3 +1,4 @@
+using Acme.Auditing.Elasticsearch;
 using Acme.Blog.EntityFrameworkCore;
 using Acme.Blog.MultiTenancy;
 using Medallion.Threading;
@@ -16,7 +17,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Acme.Auditing.Elasticsearch;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc;

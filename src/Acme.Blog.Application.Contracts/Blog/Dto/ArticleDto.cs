@@ -1,7 +1,7 @@
 ﻿using System;
 using Volo.Abp.Application.Dtos;
 
-namespace Acme.Blog.Blog.Dtos;
+namespace Acme.Blog.Blog.Dto;
 
 public class ArticleDto : EntityDto<Guid>
 {
