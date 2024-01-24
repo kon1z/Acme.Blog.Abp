@@ -1,21 +1,24 @@
 ﻿using Acme.Blog.Blog.Entities;
 using Acme.Blog.Blog.IRepositories;
 using JetBrains.Annotations;
-using System;
 using System.Threading.Tasks;
-using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Services;
 
 namespace Acme.Blog.Blog.Managers;
 
 [UsedImplicitly]
-public class BlogManager(IArticleRepository articleRepository) : DomainService
+public class BlogManager : DomainService
 {
-	public IReadOnlyRepository<Article, Guid> ArticleReadOnlyRepository =>
-		LazyServiceProvider.LazyGetRequiredService<IReadOnlyRepository<Article, Guid>>();
+	public IArticleRepository ArticleRepository => 
+		LazyServiceProvider.LazyGetRequiredService<IArticleRepository>();
 
-	public async Task<Article> CreateArticleAsync(string title, string content)
+	public async Task<Article> CreateArticleAsync(Article article)
 	{
-		return await articleRepository.InsertAsync(new Article(title, content));
+		return await ArticleRepository.InsertAsync(article);
+	}
+
+	public void UpdateArticleContentAsync(Article article, string content)
+	{
+		article.UpdateContent(content);
 	}
 }

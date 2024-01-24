@@ -20,6 +20,13 @@ public sealed class Article : FullAuditedAggregateRoot<Guid>
 		UpdateDescription(content);
 		Content = new ArticleContent(content);
 	}
+	
+	public Article(Guid id, string title, string content) : base(id)
+	{
+		Title = title;
+		UpdateDescription(content);
+		Content = new ArticleContent(content);
+	}
 
 	public string Title { get; set; } = null!;
 	public string? Description { get; private set; }
@@ -28,10 +35,12 @@ public sealed class Article : FullAuditedAggregateRoot<Guid>
 
 	private void UpdateDescription(string content)
 	{
+		Check.NotNull(Content, "Article's content");
+
 		Description = content.Take(196) + "...";
 	}
 
-	public void UpdateContent(string content)
+	internal void UpdateContent(string content)
 	{
 		Check.NotNull(Content, "Article's content");
 

@@ -20,7 +20,7 @@ namespace Acme.Blog.Blog.Entities
 		public Guid ArticleId { get; private set; }
 		public string Content { get; private set; } = null!;
 
-		public void Update(string content)
+		internal void Update(string content)
 		{
 			Content = content;
 		}
