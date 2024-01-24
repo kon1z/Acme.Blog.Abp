@@ -10,5 +10,8 @@ namespace Acme.Blog.Blog.IAppServices
     public interface ICategoryService : IApplicationService
     {
         Task CreateCategoryAsync(CategoryDto dto);
+        Task<bool> UpdateCategoryAsync(Guid id, string name);
+        Task<bool> DeleteCategoryAsync(Guid id);
+        Task<List<CategoryDto>> GetAllCategoriesAsync();
     }
 }
