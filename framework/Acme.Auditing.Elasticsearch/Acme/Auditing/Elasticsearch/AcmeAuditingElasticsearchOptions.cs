@@ -1,13 +1,11 @@
-﻿using System;
-using Elastic.Clients.Elasticsearch;
-using System.Collections.Generic;
+﻿using Elastic.Clients.Elasticsearch;
 
 namespace Acme.Auditing.Elasticsearch
 {
-	public class AcmeAuditingElasticsearchOptions : ElasticsearchClientSettings
+	public class AcmeAuditingElasticsearchOptions
 	{
 		public bool Enable { get; set; }
-		public string[]? Node { get; set; }
+		public string? Node { get; set; }
 		public string? Username { get; set; }
 		public string? Password { get; set; }
 

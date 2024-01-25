@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using Elastic.Clients.Elasticsearch;
+using Microsoft.Extensions.Options;
 using Volo.Abp.AspNetCore;
 using Volo.Abp.Auditing;
 using Volo.Abp.Modularity;
@@ -18,24 +20,24 @@ namespace Acme.Auditing.Elasticsearch
 		public override void ConfigureServices(ServiceConfigurationContext context)
 		{
 			var configuration = context.Services.GetConfiguration();
-
+			var hostingEnvironment = context.Services.GetHostingEnvironment();
+			
 			context.Services.Configure<AcmeAuditingElasticsearchOptions>(options =>
 			{
 				options.Enable = configuration.GetValue<bool>("Elasticsearch:Enable");
-				// TODO SingleNode or CloudNode, this property is not work now.
-				options.Node = configuration.GetSection("Elasticsearch:Node").Get<string[]>();
+				options.Node = configuration["Elasticsearch:Node"];
 
 				options.Username = configuration["Elasticsearch:Username"];
 				options.Password = configuration["Elasticsearch:Password"];
 
-				if (!options.Username.IsNullOrEmpty()
-					&& !options.Password.IsNullOrEmpty())
-				{
-					options.Authentication(new BasicAuthentication(options.Username, options.Password));
-				}
+				options.RequestIndexName = $"request-{hostingEnvironment.EnvironmentName.ToLower()}";
+			});
 
-				options.Environment = context.Services.GetAbpHostEnvironment().EnvironmentName ?? "Development";
-				options.RequestIndexName = configuration["Elasticsearch:RequestIndexName"] ?? "Request";
+			context.Services.AddTransient<ElasticsearchClient>(sp =>
+			{
+				var options = sp.GetRequiredService<IOptions<AcmeAuditingElasticsearchOptions>>().Value;
+				var factory = sp.GetRequiredService<IElasticSearchClientFactory>();
+				return factory.BuildElasticsearchClient(options);
 			});
 
 			// TODO Link Test

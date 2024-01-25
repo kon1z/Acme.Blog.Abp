@@ -14,7 +14,7 @@ namespace Acme.Blog.Blog.Entities
 
 		public ArticleContent(string content)
 		{
-			Content = content;
+			Update(content);
 		}
 
 		public Guid ArticleId { get; private set; }
