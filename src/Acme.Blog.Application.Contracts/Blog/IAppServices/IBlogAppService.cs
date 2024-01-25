@@ -12,5 +12,5 @@ public interface IBlogAppService : IApplicationService
 	Task<PagedResultDto<ArticleDto>> GetListAsync(GetArticleDto input);
 	Task<ArticleDetailDto> GetAsync(Guid id);
 	Task<ArticleDetailDto> CreateAsync(CreateArticleInput input);
-	Task<ArticleDetailDto> UpdateAsync(UpdateArticleInput input);
+	Task<ArticleDetailDto> UpdateAsync(Guid id, UpdateArticleInput input);
 }
