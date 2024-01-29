@@ -8,6 +8,7 @@ using Acme.Blog.Blog.Entities;
 using Acme.Blog.Blog.IAppServices;
 using Acme.Blog.Blog.IRepositories;
 using Volo.Abp.Application.Services;
+using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
 
 namespace Acme.Blog.Blog.AppServices
@@ -16,33 +17,33 @@ namespace Acme.Blog.Blog.AppServices
     {
         private readonly ICategoryRepository _categoryRepository = categoryRepository;
 
-        public async Task CreateCategoryAsync(CategoryDto dto)
+        public async Task<CategoryDto> CreateCategoryAsync(CategoryDto dto)
         {
-            var category = ObjectMapper.Map<CategoryDto, Category>(dto);
-            await _categoryRepository.InsertAsync(category,true);
+            var category = new Category(dto.Name);
+            var ans = await _categoryRepository.InsertAsync(category,true);
+            return ObjectMapper.Map<Category, CategoryDto>(ans);
         }
 
-        public async Task<bool> UpdateCategoryAsync(Guid id, string name)
+        public async Task<CategoryDto> UpdateCategoryAsync(Guid id, string name)
         {
             var category = await _categoryRepository.FindAsync(id);
             if (category == null)
             {
-                return false;
+                throw new EntityNotFoundException();
             }
             category.Name = name;
-            await _categoryRepository.UpdateAsync(category,true);
-            return true;
+            var ans  = await _categoryRepository.UpdateAsync(category,true);
+            return ObjectMapper.Map<Category,CategoryDto>(ans);
         }
 
-        public async Task<bool> DeleteCategoryAsync(Guid id)
+        public async Task DeleteCategoryAsync(Guid id)
         {
             var category = await _categoryRepository.FirstOrDefaultAsync(r=>r.Id == id);
             if (category == null)
             {
-                return false;
+                throw new EntityNotFoundException();
             }
             await _categoryRepository.DeleteAsync(category,true);
-            return true;
         }
 
         public async Task<List<CategoryDto>> GetAllCategoriesAsync()

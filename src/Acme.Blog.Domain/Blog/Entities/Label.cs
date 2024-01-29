@@ -5,5 +5,11 @@ namespace Acme.Blog.Blog.Entities;
 
 public class Label : FullAuditedAggregateRoot<Guid>
 {
+	protected Label(){}
+
+    public Label(string name)
+    {
+        Name = name;
+    }
 	public string Name { get; set; } = string.Empty;
 }
