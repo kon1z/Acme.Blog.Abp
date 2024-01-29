@@ -35,9 +35,9 @@ public class BlogAppService(BlogManager blogManager) : BlogAppServiceBase, IBlog
 		return ObjectMapper.Map<Article, ArticleDetailDto>(article);
 	}
 
-	public async Task<ArticleDetailDto> UpdateAsync(UpdateArticleInput input)
+	public async Task<ArticleDetailDto> UpdateAsync(Guid id, UpdateArticleInput input)
 	{
-		var article = await blogManager.ArticleRepository.GetAsync(input.Id);
+		var article = await blogManager.ArticleRepository.GetAsync(id);
 
 		blogManager.UpdateArticleContentAsync(article, input.Content);
 

@@ -23,6 +23,7 @@ using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
+using Volo.Abp.Auditing;
 using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
 using Volo.Abp.DistributedLocking;
@@ -60,6 +61,17 @@ public class BlogHttpApiHostModule : AbpModule
 		ConfigureDistributedLocking(context, configuration);
 		ConfigureCors(context, configuration);	
 		ConfigureSwaggerServices(context, configuration);
+		ConfigureAuditing(hostingEnvironment);
+	}
+
+	private void ConfigureAuditing(IWebHostEnvironment hostingEnvironment)
+	{
+		Configure<AbpAuditingOptions>(options =>
+		{
+			options.ApplicationName = hostingEnvironment.ApplicationName;
+			options.IsEnabledForGetRequests = true;
+			options.IsEnabledForAnonymousUsers = true;
+		});
 	}
 
 	private void ConfigureDistributedLocking(ServiceConfigurationContext context, IConfiguration configuration)
