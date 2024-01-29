@@ -1,6 +1,6 @@
 ﻿using System;
-using Acme.Blog.Blog.Entities;
-using Acme.Blog.Blog.IRepositories;
+using Acme.Blog.Domain.Blog.Entities;
+using Acme.Blog.Domain.Blog.IRepositories;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace Acme.Blog.EntityFrameworkCore.Repositories;

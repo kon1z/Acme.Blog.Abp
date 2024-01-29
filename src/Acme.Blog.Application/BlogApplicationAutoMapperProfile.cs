@@ -1,5 +1,5 @@
-﻿using Acme.Blog.Blog.Dto;
-using Acme.Blog.Blog.Entities;
+﻿using Acme.Blog.Application.Blog.Dto;
+using Acme.Blog.Domain.Blog.Entities;
 using AutoMapper;
 
 namespace Acme.Blog;

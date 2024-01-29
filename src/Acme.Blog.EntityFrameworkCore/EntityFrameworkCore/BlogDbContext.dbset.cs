@@ -1,11 +1,11 @@
-﻿using Acme.Blog.Blog.Entities;
+﻿using Acme.Blog.Domain.Blog.Entities;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.TenantManagement;
 
 namespace Acme.Blog.EntityFrameworkCore
 {
-	public partial class BlogDbContext
+    public partial class BlogDbContext
 	{
 		/* Add DbSet properties for your Aggregate Roots / Entities here. */
 

@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Acme.Blog.Blog.Dto;
-using Acme.Blog.Blog.Entities;
-using Acme.Blog.Blog.IAppServices;
-using Acme.Blog.Blog.IRepositories;
+using Acme.Blog.Application.Blog.Dto;
+using Acme.Blog.Application.Blog.IAppServices;
+using Acme.Blog.Domain.Blog.Entities;
+using Acme.Blog.Domain.Blog.IRepositories;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
 
-namespace Acme.Blog.Blog.AppServices
+namespace Acme.Blog.Application.Blog.AppServices
 {
-    public class LableService(ILabelRepository labelRepository) : BlogAppServiceBase, ILableService
+    public class LableAppService(ILabelRepository labelRepository) : BlogAppServiceBase, ILableService
     {
         private readonly ILabelRepository _labelRepository = labelRepository;
 
@@ -30,7 +30,7 @@ namespace Acme.Blog.Blog.AppServices
             {
                 throw new EntityNotFoundException(nameof(lable));
             }
-                
+
             var ans = await _labelRepository.UpdateAsync(lable);
             return ObjectMapper.Map<Label, LableDto>(ans);
         }

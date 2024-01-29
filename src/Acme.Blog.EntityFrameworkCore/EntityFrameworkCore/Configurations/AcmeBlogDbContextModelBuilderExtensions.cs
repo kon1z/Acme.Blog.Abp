@@ -1,10 +1,10 @@
-﻿using Acme.Blog.Blog.Entities;
+﻿using Acme.Blog.Domain.Blog.Entities;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace Acme.Blog.EntityFrameworkCore.Configurations
 {
-	public static class AcmeBlogDbContextModelBuilderExtensions
+    public static class AcmeBlogDbContextModelBuilderExtensions
 	{
 		public static void ConfigureBlog(this ModelBuilder builder)
 		{

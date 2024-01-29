@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Acme.Blog.Blog.Dto
+namespace Acme.Blog.Application.Blog.Dto
 {
     public class LableDto
     {

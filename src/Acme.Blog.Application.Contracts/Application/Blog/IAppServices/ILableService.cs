@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Acme.Blog.Blog.Dto;
+using Acme.Blog.Application.Blog.Dto;
 
-namespace Acme.Blog.Blog.IAppServices
+namespace Acme.Blog.Application.Blog.IAppServices
 {
     public interface ILableService
     {
