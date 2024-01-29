@@ -7,6 +7,7 @@ using Acme.Blog.Blog.Dto;
 using Acme.Blog.Blog.Entities;
 using Acme.Blog.Blog.IAppServices;
 using Acme.Blog.Blog.IRepositories;
+using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
 
 namespace Acme.Blog.Blog.AppServices
@@ -15,39 +16,34 @@ namespace Acme.Blog.Blog.AppServices
     {
         private readonly ILabelRepository _labelRepository = labelRepository;
 
-        public async Task AddAndUpdateLable(LableDto dto)
+        public async Task<LableDto> AddLable(LableDto dto)
         {
-            var lable = ObjectMapper.Map<LableDto, Label>(dto);
-            if (dto.Id == default)
-            {
-                
-                await _labelRepository.InsertAsync(lable, true);
-                return;
-            }
-
-            lable = await _labelRepository.FirstOrDefaultAsync(r => r.Id == dto.Id);
-            if(lable == null)
-            {
-                return;
-            }
-
-            lable.Name = dto.Name;
-
-            await _labelRepository.UpdateAsync(lable, true);
-
-
+            var lable = new Label(dto.Name);
+            var ans = await _labelRepository.InsertAsync(lable);
+            return ObjectMapper.Map<Label, LableDto>(ans);
         }
 
-        public async Task<bool> DeleteLable(Guid id)
+        public async Task<LableDto> UpdateLable(LableDto dto)
+        {
+            var lable = await _labelRepository.FirstOrDefaultAsync(r => r.Id == dto.Id && !r.IsDeleted);
+            if (lable == null)
+            {
+                throw new EntityNotFoundException(nameof(lable));
+            }
+                
+            var ans = await _labelRepository.UpdateAsync(lable);
+            return ObjectMapper.Map<Label, LableDto>(ans);
+        }
+
+        public async Task DeleteLable(Guid id)
         {
             var lable = await _labelRepository.FirstOrDefaultAsync(r => r.Id == id);
             if (lable == null)
             {
-                return false;
+                throw new EntityNotFoundException(nameof(lable));
             }
 
             await _labelRepository.DeleteAsync(lable, true);
-            return true;
         }
 
         public async Task<List<LableDto>> GetLables(LableDto dto)

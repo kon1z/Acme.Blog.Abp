@@ -29,7 +29,7 @@ namespace Acme.Blog.Blog.AppServices
             var category = await _categoryRepository.FindAsync(id);
             if (category == null)
             {
-                throw new EntityNotFoundException();
+                throw new EntityNotFoundException(nameof(category));
             }
             category.Name = name;
             var ans  = await _categoryRepository.UpdateAsync(category,true);
@@ -43,7 +43,7 @@ namespace Acme.Blog.Blog.AppServices
             {
                 throw new EntityNotFoundException();
             }
-            await _categoryRepository.DeleteAsync(category,true);
+            await _categoryRepository.DeleteAsync(category);
         }
 
         public async Task<List<CategoryDto>> GetAllCategoriesAsync()
