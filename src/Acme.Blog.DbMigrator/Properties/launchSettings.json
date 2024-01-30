@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Acme.Blog.DbMigrator": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
