@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+
+  migrations:
+    image:  'acmeblog/migrations:${TAG:-latest}'
+    build:
+      context: .
+      dockerfile: src/Acme.Blog.DbMigrator/Dockerfile
+    depends_on:
+      - postgresql
